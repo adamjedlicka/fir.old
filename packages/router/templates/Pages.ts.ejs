@@ -1,0 +1,8 @@
+import { defineAsyncComponent } from 'vue'
+export { default as layout } from '<%- layout.component -%>'
+
+export const pages = [
+<%_ for (const page of pages) { _%>
+  { path: /<%- page.path -%>/, component: defineAsyncComponent(() => import('<%- page.component -%>')) },
+<%_ } _%>
+]

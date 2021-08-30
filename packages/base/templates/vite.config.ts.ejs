@@ -1,0 +1,18 @@
+import path from 'path'
+import Vue from '@vitejs/plugin-vue'
+
+export default {
+  plugins: [
+    Vue(),
+    {
+      name: 'my-ssr',
+      transform(code, id, ssr) {
+        if(id.endsWith(path.join('cli', 'index.ts'))) {
+         return code.replace(/const isServer = true/, `const isServer = ${ssr}`)
+        }
+
+        return code
+      }
+    }
+  ],
+}

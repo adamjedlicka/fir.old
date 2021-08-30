@@ -1,0 +1,26 @@
+{
+  "name": "fir",
+  "version": "0.1.0",
+  "description": "Opinionated meta-framework with SSR and clean architecture",
+  "author": "Adam Jedlička <mail@adamjedlicka.cz>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "fir dev",
+    "build": "fir build",
+    "serve": "fir serve",
+    "test": "playwright test",
+    "docs": "docsify serve docs -o -p 9001"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.14.1",
+    "@types/node": "^16.4.13",
+    "docsify-cli": "^4.4.3",
+    "get-port": "^5.1.1",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.2.4"
+  }
+}
