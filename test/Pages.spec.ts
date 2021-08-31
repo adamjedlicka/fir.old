@@ -258,3 +258,31 @@ test('route with wildcard has lower priority than fully fixed route', async ({ p
     },
   )
 })
+
+test('route params can be rendered', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir/base',
+        '@fir/router',
+        [
+          'my-package',
+          {
+            pages: {
+              user: {
+                '_id.vue': '<template>{{ $route.params.id }}</template>',
+              },
+            },
+          },
+        ],
+      ],
+    },
+    async ({ url }) => {
+      const response1 = await page.goto(url + '/user/1234')
+
+      expect(await response1?.text()).toContain('1234')
+
+      await expect(page.locator('#app')).toContainText('1234')
+    },
+  )
+})
