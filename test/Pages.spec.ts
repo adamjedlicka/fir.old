@@ -229,3 +229,32 @@ test('dynamic parameters', async ({ page }) => {
     },
   )
 })
+
+test('route with wildcard has lower priority than fully fixed route', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir/base',
+        '@fir/router',
+        [
+          'my-package',
+          {
+            pages: {
+              user: {
+                '_id.vue': '<template>User detail</template>',
+                'detail.vue': '<template>User fixed detail</template>',
+              },
+            },
+          },
+        ],
+      ],
+    },
+    async ({ url }) => {
+      const response1 = await page.goto(url + '/user/detail')
+
+      expect(await response1?.text()).toContain('User fixed detail')
+
+      await expect(page.locator('#app')).toContainText('User fixed detail')
+    },
+  )
+})

@@ -49,6 +49,16 @@ export default class Pages extends GeneratingConcept {
     if (parts[0] === 'index') return 1
     if (parts[0] === '_404') return 9001
 
-    return 10
+    let priority = 10
+
+    for (let part of parts) {
+      if (part[0] === '_') {
+        priority += 20
+      } else {
+        priority += 10
+      }
+    }
+
+    return priority
   }
 }
