@@ -201,3 +201,31 @@ test('nested routes', async ({ page }) => {
     },
   )
 })
+
+test('dynamic parameters', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir/base',
+        '@fir/router',
+        [
+          'my-package',
+          {
+            pages: {
+              user: {
+                '_id.vue': '<template>User detail</template>',
+              },
+            },
+          },
+        ],
+      ],
+    },
+    async ({ url }) => {
+      const response = await page.goto(url + '/user/1234')
+
+      expect(await response?.text()).toContain('User detail')
+
+      await expect(page.locator('#app')).toContainText('User detail')
+    },
+  )
+})
