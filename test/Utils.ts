@@ -68,7 +68,9 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
 }
 
 const makeTempDir = async (fn: (string) => Promise<void>) => {
-  const dir = await fs.mkdtemp('temp-')
+  await fs.mkdir('.test', { recursive: true })
+
+  const dir = await fs.mkdtemp('.test/temp-')
 
   try {
     await fn(path.join(process.cwd(), dir))

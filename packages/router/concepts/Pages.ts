@@ -20,27 +20,32 @@ export default class Pages extends GeneratingConcept {
   }
 
   processFile(pkg: Package, file: string): any {
-    const ident = path.parse(file).name
+    const parsed = path.parse(file)
+    const parts = [...parsed.dir.split('/').filter(Boolean), parsed.name]
     const component = pkg.pathResolve(this.directory(), file)
 
     return {
-      ident,
-      path: this.getPath(ident),
-      priority: this.getPriority(ident),
+      ident: this.getIdent(parts),
+      path: this.getPath(parts),
+      priority: this.getPriority(parts),
       component,
     }
   }
 
-  protected getPath(ident) {
-    if (ident === 'index') return '^\\/$'
-    if (ident === '_404') return '^\\/.*$'
-
-    return `^\\/${ident}$`
+  protected getIdent(parts: string[]): string {
+    return parts.join('_')
   }
 
-  protected getPriority(ident) {
-    if (ident === 'index') return 1
-    if (ident === '_404') return 9001
+  protected getPath(parts: string[]): string {
+    if (parts[0] === 'index') return '^\\/$'
+    if (parts[0] === '_404') return '^\\/.*$'
+
+    return `^\\/${parts.join('\\/')}$`
+  }
+
+  protected getPriority(parts: string[]): number {
+    if (parts[0] === 'index') return 1
+    if (parts[0] === '_404') return 9001
 
     return 10
   }

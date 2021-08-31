@@ -173,3 +173,31 @@ test('navigation between pages', async ({ page }) => {
     },
   )
 })
+
+test('nested routes', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir/base',
+        '@fir/router',
+        [
+          'my-package',
+          {
+            pages: {
+              a: {
+                'b.vue': '<template>Page AB</template>',
+              },
+            },
+          },
+        ],
+      ],
+    },
+    async ({ url }) => {
+      const response = await page.goto(url + '/a/b')
+
+      expect(await response?.text()).toContain('Page AB')
+
+      await expect(page.locator('#app')).toContainText('Page AB')
+    },
+  )
+})
