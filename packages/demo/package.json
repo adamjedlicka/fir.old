@@ -9,8 +9,9 @@
     "build": "fir build",
     "serve": "fir serve"
   },
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^10.3.3",
+    "http-proxy-middleware": "^2.0.1",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.9"
   }
