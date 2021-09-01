@@ -9,9 +9,6 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "fir dev",
-    "build": "fir build",
-    "serve": "fir serve",
     "test": "playwright test",
     "docs": "docsify serve docs -o -p 9001"
   },
