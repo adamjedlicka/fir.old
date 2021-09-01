@@ -4,6 +4,7 @@ import devalue from 'devalue'
 import fetch from 'node-fetch'
 import { Package } from './Package'
 import { Concept } from './Concept'
+import { mergeConfig, UserConfig } from 'vite'
 import { Request, Response, RequestHandler } from 'express'
 
 global.fetch = fetch
@@ -33,6 +34,21 @@ export abstract class Fir {
 
   public context: Record<string, any> = {}
 
+  public viteConfig: UserConfig = {
+    plugins: [
+      {
+        name: 'fir',
+        transform(code, id, ssr) {
+          if (id.endsWith(path.join('core', 'index.ts'))) {
+            return code.replace(/__IS_SERVER__/, String(ssr))
+          }
+
+          return code
+        },
+      },
+    ],
+  }
+
   constructor(config?: Config) {
     this.dir = config?.dir ?? process.cwd()
     this.packages = config?.packages ?? []
@@ -49,6 +65,8 @@ export abstract class Fir {
       const loaded = await this.loadPackage(resolved)
 
       packages[loaded.getId()] = loaded
+
+      this.viteConfig = mergeConfig(this.viteConfig, await loaded.getViteConfig())
 
       for (const concept of await this.loadConcepts(loaded)) {
         concepts[concept.directory()] = concept
@@ -89,6 +107,10 @@ export abstract class Fir {
       .replace(`<!--payload-->`, payload)
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+  }
+
+  protected buildConfig(viteConfig: UserConfig): Record<string, any> {
+    return mergeConfig(this.viteConfig, viteConfig, true)
   }
 
   protected preloadLinks(ctx, manifest = {}): string {

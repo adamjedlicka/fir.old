@@ -1,5 +1,5 @@
 import path from 'path'
-import { createServer } from 'vite'
+import { createServer, mergeConfig } from 'vite'
 import fs from 'fs/promises'
 import express, { Application } from 'express'
 import { Fir } from './Fir'
@@ -7,13 +7,14 @@ import Youch from 'youch'
 
 export class Dev extends Fir {
   async createServer(): Promise<Application> {
-    const viteDevServer = await createServer({
-      server: { middlewareMode: true },
-      clearScreen: false,
-      configFile: path.resolve(this.getBuildDir(), 'vite.config.ts'),
-      root: this.getBuildDir(),
-      logLevel: process.env.NODE_ENV === 'test' ? 'silent' : undefined,
-    })
+    const viteDevServer = await createServer(
+      this.buildConfig({
+        server: { middlewareMode: true },
+        clearScreen: false,
+        root: this.getBuildDir(),
+        logLevel: process.env.NODE_ENV === 'test' ? 'silent' : undefined,
+      }),
+    )
 
     const server = express()
 

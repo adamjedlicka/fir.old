@@ -26,6 +26,16 @@ export class Package {
     return files.map((file) => file.replace(/\\/g, '/'))
   }
 
+  async getViteConfig(): Promise<Record<string, any>> {
+    try {
+      const { default: viteConfig } = await import(path.join(this.path, 'vite.config'))
+
+      return viteConfig
+    } catch {
+      return {}
+    }
+  }
+
   pathResolve(...paths: string[]) {
     return path.join(this.path, ...paths)
   }

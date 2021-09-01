@@ -19,7 +19,6 @@ export default class Templates extends GeneratingConcept {
       this.renderTemplate('entry-client.ts.ejs', this.fir),
       this.renderTemplate('entry-server.ts.ejs', this.fir),
       this.renderTemplate('index.html.ejs', this.fir),
-      this.renderTemplate('vite.config.ts.ejs', this.fir),
     ])
   }
 
