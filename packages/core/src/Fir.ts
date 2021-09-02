@@ -19,6 +19,7 @@ interface Config {
 export interface AppContext extends SSRContext {
   req: Request
   payload: Record<string, any>
+  head: Record<string, any>
   id: () => string
 }
 
@@ -93,6 +94,7 @@ export abstract class Fir {
     const ctx: AppContext = {
       req,
       payload: {},
+      head: {},
       id: () => String(++_id),
     }
 
@@ -102,11 +104,13 @@ export abstract class Fir {
 
     const payload = `<script>window.__PAYLOAD__ = ${devalue(ctx.payload)}</script>`
 
+    const head = this.renderHead(ctx.head)
+
     const html = opts.template
       .replace('<!--app-html-->', appHtml)
       .replace('<!--preload-links-->', preloadLinks)
       .replace('<!--payload-->', payload)
-      .replace('<!--teleport-head-->', ctx.__teleportBuffers?.head.join('') ?? '')
+      .replace('<!--head-->', head)
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   }
@@ -146,6 +150,16 @@ export abstract class Fir {
       // TODO
       return ''
     }
+  }
+
+  protected renderHead(head: Record<string, any>): string {
+    let rendered = ''
+
+    for (const [key, value] of Object.entries(head)) {
+      rendered += `<${key}>${value}</${key}>`
+    }
+
+    return rendered
   }
 
   async close() {

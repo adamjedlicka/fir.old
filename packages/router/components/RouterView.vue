@@ -1,9 +1,7 @@
 <template>
   <suspense>
     <component :is="layout">
-      <suspense>
-        <component :is="page.component" :key="page.path" />
-      </suspense>
+      <component :is="page.component" />
     </component>
   </suspense>
 </template>

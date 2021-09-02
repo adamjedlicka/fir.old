@@ -1,5 +1,7 @@
 <template>
   <section class="text-gray-600 body-font">
+    <Title>{{ category.name }}</Title>
+
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-wrap w-full mb-20">
         <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
@@ -32,10 +34,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
+import Title from '@fir/base/components/Title.vue'
 import CategoriesByUrlKey from '../../gql/queries/CategoriesByUrlKey.gql'
 import { query } from '../../GraphQL'
 
 export default defineComponent({
+  components: {
+    Title,
+  },
+
   async setup() {
     const $route = inject('$route') as any
 

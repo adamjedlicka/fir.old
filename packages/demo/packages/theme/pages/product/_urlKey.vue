@@ -1,5 +1,7 @@
 <template>
   <section class="text-gray-600 body-font overflow-hidden">
+    <Title>{{ product.name }}</Title>
+
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <img
@@ -128,10 +130,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
+import Title from '@fir/base/components/Title.vue'
 import ProductsByUrlKey from '../../gql/queries/ProductsByUrlKey.gql'
 import { query } from '../../GraphQL'
 
 export default defineComponent({
+  components: {
+    Title,
+  },
+
   async setup() {
     const $route = inject('$route') as any
 
