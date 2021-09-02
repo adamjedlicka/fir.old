@@ -1,7 +1,7 @@
 <template>
   <header class="text-gray-600 body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <router-link to="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -14,12 +14,17 @@
         >
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
         </svg>
-        <span class="ml-3 text-xl">Tailblocks</span>
-      </a>
+        <span class="ml-3 text-xl">Fir</span>
+      </router-link>
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-        <router-link to="/" class="mr-5 hover:text-gray-900">Homepage</router-link>
-        <router-link to="/product" class="mr-5 hover:text-gray-900">Product</router-link>
-        <router-link to="/category" class="mr-5 hover:text-gray-900">Category</router-link>
+        <router-link
+          v-for="category in categories"
+          :key="category.url_key"
+          :to="`/category/${category.url_key}`"
+          class="mr-5 hover:text-gray-900"
+        >
+          {{ category.name }}
+        </router-link>
       </nav>
       <button
         class="
@@ -37,7 +42,7 @@
           md:mt-0
         "
       >
-        Button
+        Checkout
         <svg
           fill="none"
           stroke="currentColor"
@@ -53,3 +58,19 @@
     </div>
   </header>
 </template>
+
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import CategoriesByParentId from '../gql/queries/CategoriesByParentId.gql'
+import { query } from '../GraphQL'
+
+export default defineComponent({
+  async setup() {
+    const { data } = await query(CategoriesByParentId, () => ({ parentId: 2 }))
+
+    return {
+      categories: computed(() => data.value.categories.items),
+    }
+  },
+})
+</script>

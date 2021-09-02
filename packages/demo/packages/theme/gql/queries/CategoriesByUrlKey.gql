@@ -1,0 +1,18 @@
+query ($urlKey: String!) {
+  categories(filters: { url_key: { eq: $urlKey } }) {
+    items {
+      name
+      description
+      products {
+        items {
+          sku
+          name
+          url_key
+          thumbnail {
+            url
+          }
+        }
+      }
+    }
+  }
+}

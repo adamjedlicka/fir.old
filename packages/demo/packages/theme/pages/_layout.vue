@@ -1,8 +1,6 @@
 <template>
   <Header />
-  <main class="container mx-auto p-5 flex-grow">
-    <slot />
-  </main>
+  <slot />
   <Footer />
 </template>
 

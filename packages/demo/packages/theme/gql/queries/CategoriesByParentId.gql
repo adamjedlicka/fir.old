@@ -1,0 +1,8 @@
+query ($parentId: String!) {
+  categories(filters: { parent_id: { eq: $parentId } }) {
+    items {
+      name
+      url_key
+    }
+  }
+}
