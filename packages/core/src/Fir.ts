@@ -4,6 +4,7 @@ import devalue from 'devalue'
 import fetch from 'node-fetch'
 import { Package } from './Package'
 import { Concept } from './Concept'
+import { SSRContext } from '@vue/server-renderer'
 import { mergeConfig, UserConfig } from 'vite'
 import { Request, Response, RequestHandler } from 'express'
 
@@ -15,7 +16,7 @@ interface Config {
   packages?: string[]
 }
 
-export interface AppContext {
+export interface AppContext extends SSRContext {
   req: Request
   payload: Record<string, any>
   id: () => string
@@ -102,9 +103,10 @@ export abstract class Fir {
     const payload = `<script>window.__PAYLOAD__ = ${devalue(ctx.payload)}</script>`
 
     const html = opts.template
-      .replace(`<!--app-html-->`, appHtml)
-      .replace(`<!--preload-links-->`, preloadLinks)
-      .replace(`<!--payload-->`, payload)
+      .replace('<!--app-html-->', appHtml)
+      .replace('<!--preload-links-->', preloadLinks)
+      .replace('<!--payload-->', payload)
+      .replace('<!--teleport-head-->', ctx.__teleportBuffers?.head.join('') ?? '')
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   }

@@ -2,7 +2,7 @@
   <suspense>
     <component :is="layout">
       <suspense>
-        <component :is="page.component" :key="page.path" :path="path" />
+        <component :is="page.component" :key="page.path" />
       </suspense>
     </component>
   </suspense>
