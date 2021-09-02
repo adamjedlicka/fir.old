@@ -26,6 +26,7 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
     let dev: Dev | null = null
     let app: Application | null = null
     let server: Server | null = null
+    let port: number | null = null
 
     try {
       for (const pkg of config.packages) {
@@ -47,13 +48,19 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
 
       app = await dev.createServer()
 
-      const port = await getPort()
+      port = await getPort()
 
-      server = app.listen(port, 'localhost')
+      await new Promise((resolve) => {
+        server = app?.listen(port, () => resolve(null))!
+      })
+    } catch (e) {
+      console.error('Error during application startup', e)
+    }
 
+    try {
       await callback({
-        app,
-        server,
+        app: app!,
+        server: server!,
         url: `http://localhost:${port}`,
         writeFile: (_path, _content) => writeFile(path.join(dir, _path), _content),
         rm: (_path) => fs.rm(path.join(dir, _path), { recursive: true }),
@@ -61,8 +68,12 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
     } catch (e) {
       throw e
     } finally {
-      await server?.close()
-      await dev?.close()
+      try {
+        await server?.close()
+        await dev?.close()
+      } catch (e) {
+        console.error('Could not close server', e)
+      }
     }
   })
 }
@@ -72,16 +83,7 @@ const makeTempDir = async (fn: (string) => Promise<void>) => {
 
   const dir = await fs.mkdtemp('.test/temp-')
 
-  try {
-    await fn(path.join(process.cwd(), dir))
-  } catch (e) {
-    throw e
-  } finally {
-    await fs.rm(dir, {
-      recursive: true,
-      force: true,
-    })
-  }
+  await fn(path.join(process.cwd(), dir))
 }
 
 const writeFile = async (file: string, content: string): Promise<void> => {

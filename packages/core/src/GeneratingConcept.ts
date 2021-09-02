@@ -76,7 +76,7 @@ export abstract class GeneratingConcept extends Concept {
   async onChange(pkg: Package, file: string) {}
 
   async onUnlink(pkg: Package, file: string) {
-    await this._generate(this.getFiles())
+    await this.generate(this.getFiles())
   }
 
   getFiles() {

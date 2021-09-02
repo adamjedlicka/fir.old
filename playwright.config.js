@@ -1,4 +1,4 @@
-require('ts-node/register/transpile-only')
+require('ts-node').register({ transpileOnly: true })
 
 process.env.NODE_ENV = 'test'
 

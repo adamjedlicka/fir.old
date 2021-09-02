@@ -41,7 +41,9 @@ export class Dev extends Fir {
 
         const youch = new Youch(e, req)
 
-        const html = await youch.toHTML()
+        const [html, json] = await Promise.all([youch.toHTML(), youch.toJSON()])
+
+        console.error(json.error.message)
 
         res.status(500).end(html)
       }

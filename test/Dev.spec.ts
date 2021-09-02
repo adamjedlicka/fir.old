@@ -13,44 +13,6 @@ test('serves an app', async ({ page }) => {
   )
 })
 
-test('HMR', async ({ page }) => {
-  await makeProject(
-    {
-      packages: [
-        '@fir/base',
-        [
-          'my-package',
-          {
-            templates: {
-              'App.vue.ejs': `
-                <template>
-                  <h1>A</h1>
-                </template>
-              `,
-            },
-          },
-        ],
-      ],
-    },
-    async ({ url, writeFile }) => {
-      const response1 = await page.goto(url)
-      await expect(await response1?.text()).toContain('A')
-
-      await writeFile(
-        'my-package/templates/App.vue.ejs',
-        `
-          <template>
-            <h1>B</h1>
-          </template>
-        `,
-      )
-
-      const response2 = await page.goto(url)
-      await expect(await response2?.text()).toContain('B')
-    },
-  )
-})
-
 test('supports payload', async ({ page }) => {
   await makeProject(
     {
