@@ -50,8 +50,8 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
 
       port = await getPort()
 
-      await new Promise((resolve) => {
-        server = app?.listen(port, () => resolve(null))!
+      server = await new Promise((resolve) => {
+        const server = app?.listen(port, () => resolve(server))!
       })
     } catch (e) {
       console.error('Error during application startup', e)
@@ -79,8 +79,6 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
 }
 
 const makeTempDir = async (fn: (string) => Promise<void>) => {
-  await fs.mkdir('.test', { recursive: true })
-
   const dir = await fs.mkdtemp('.test/temp-')
 
   await fn(path.join(process.cwd(), dir))

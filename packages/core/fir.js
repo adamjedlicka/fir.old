@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-require('ts-node/register/transpile-only')
+require('ts-node').register({ transpileOnly: true })
 
 const path = require('path')
 const { Dev } = require('./src/Dev')
