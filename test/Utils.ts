@@ -23,58 +23,36 @@ interface MakeProjectCallbackOptions {
 
 export const makeProject = async (config: MakeProjectConfig, callback: MakeProjectCallback): Promise<void> => {
   await makeTempDir(async (dir) => {
-    let dev: Dev | null = null
-    let app: Application | null = null
-    let server: Server | null = null
-    let port: number | null = null
+    for (const pkg of config.packages) {
+      if (typeof pkg === 'string') continue
 
-    try {
-      for (const pkg of config.packages) {
-        if (typeof pkg === 'string') continue
-
-        await writePackage(dir, pkg[0], pkg[1])
-      }
-
-      dev = new Dev({
-        dir,
-        packages: config.packages.map((pkg) => {
-          if (typeof pkg === 'string') return pkg
-
-          return `./${pkg[0]}`
-        }),
-      })
-
-      await dev.bootstrap()
-
-      app = await dev.createServer()
-
-      port = await getPort()
-
-      server = await new Promise((resolve) => {
-        const server = app?.listen(port, () => resolve(server))!
-      })
-    } catch (e) {
-      console.error('Error during application startup', e)
+      await writePackage(dir, pkg[0], pkg[1])
     }
 
-    try {
-      await callback({
-        app: app!,
-        server: server!,
-        url: `http://localhost:${port}`,
-        writeFile: (_path, _content) => writeFile(path.join(dir, _path), _content),
-        rm: (_path) => fs.rm(path.join(dir, _path), { recursive: true }),
-      })
-    } catch (e) {
-      throw e
-    } finally {
-      try {
-        await server?.close()
-        await dev?.close()
-      } catch (e) {
-        console.error('Could not close server', e)
-      }
-    }
+    const dev = new Dev({
+      dir,
+      packages: config.packages.map((pkg) => {
+        if (typeof pkg === 'string') return pkg
+
+        return `./${pkg[0]}`
+      }),
+    })
+
+    await dev.bootstrap()
+
+    const app = await dev.createServer()
+
+    const port = await getPort()
+
+    const server = app.listen(port)
+
+    await callback({
+      app,
+      server,
+      url: `http://localhost:${port}`,
+      writeFile: (_path, _content) => writeFile(path.join(dir, _path), _content),
+      rm: (_path) => fs.rm(path.join(dir, _path), { recursive: true }),
+    })
   })
 }
 
