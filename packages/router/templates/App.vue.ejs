@@ -1,9 +1,9 @@
 <template>
   <suspense>
     <layout>
-      <router-view v-slot="{ Component }">
+      <router-view v-slot="{ Component, route }">
         <suspense>
-          <component :is="Component" />
+          <component :is="Component" :key="route.path" />
         </suspense>
       </router-view>
     </layout>

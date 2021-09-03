@@ -9,11 +9,7 @@ export default async (app: App, ctx) => {
     routes,
   })
 
-  if (isServer) {
-    router.push(ctx.req.url)
-  } else {
-    router.push(window.location.pathname)
-  }
+  router.push(isServer ? ctx.req.url : window.location.pathname)
 
   await router.isReady()
 
