@@ -37,12 +37,12 @@ export default class Pages extends GeneratingConcept {
   }
 
   protected getPath(parts: string[]): string {
-    if (parts[0] === 'index') return '^\\/$'
-    if (parts[0] === '_404') return '^\\/.*$'
+    if (parts[0] === 'index') return '/'
+    if (parts[0] === '_404') return '/:pathMatch(.*)*'
 
-    const route = parts.map((part) => (part[0] == '_' ? `(?<${part.slice(1)}>.+?)` : part)).join('\\/')
+    const route = parts.map((part) => (part[0] == '_' ? `:${part.slice(1)}` : part)).join('/')
 
-    return `^\\/${route}$`
+    return `/${route}`
   }
 
   protected getPriority(parts: string[]): number {

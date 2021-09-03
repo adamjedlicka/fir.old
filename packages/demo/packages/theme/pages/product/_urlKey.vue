@@ -129,7 +129,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
 import Title from '@fir/base/components/Title.vue'
 import ProductsByUrlKey from '../../gql/queries/ProductsByUrlKey.gql'
 import { query } from '../../GraphQL'
@@ -140,9 +141,9 @@ export default defineComponent({
   },
 
   async setup() {
-    const $route = inject('$route') as any
+    const $route = useRoute()
 
-    const { data } = await query(ProductsByUrlKey, () => ({ urlKey: $route.params.urlKey }))
+    const { data } = await query(ProductsByUrlKey, { urlKey: $route.params.urlKey })
 
     return {
       product: computed(() => data.value.products.items[0]),

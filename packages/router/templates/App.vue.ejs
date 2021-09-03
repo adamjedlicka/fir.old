@@ -1,3 +1,21 @@
 <template>
-  <router-view />
+  <suspense>
+    <layout>
+      <router-view v-slot="{ Component }">
+        <suspense>
+          <component :is="Component" />
+        </suspense>
+      </router-view>
+    </layout>
+  </suspense>
 </template>
+
+<script lang="ts">
+import { layout } from '/Pages'
+
+export default {
+  components: {
+    layout
+  }
+}
+</script>

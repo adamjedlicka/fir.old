@@ -1,19 +1,21 @@
 import { App } from 'vue'
-import RouterLink from '@fir/router/components/RouterLink.vue'
-import RouterView from '@fir/router/components/RouterView.vue'
+import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
+import { isServer } from '@fir/core'
+import { routes } from '/Pages'
 
-export default async (app: App) => {
-  app.component('RouterLink', RouterLink)
-  app.component('RouterView', RouterView)
-
-  app.mixin({
-    inject: {
-      $router: {
-        default: null,
-      },
-      $route: {
-        default: null,
-      },
-    },
+export default async (app: App, ctx) => {
+  const router = createRouter({
+    history: isServer ? createMemoryHistory() : createWebHistory(),
+    routes,
   })
+
+  if (isServer) {
+    router.push(ctx.req.url)
+  } else {
+    router.push(window.location.pathname)
+  }
+
+  await router.isReady()
+
+  app.use(router)
 }

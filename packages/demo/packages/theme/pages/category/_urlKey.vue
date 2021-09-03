@@ -33,7 +33,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
 import Title from '@fir/base/components/Title.vue'
 import CategoriesByUrlKey from '../../gql/queries/CategoriesByUrlKey.gql'
 import { query } from '../../GraphQL'
@@ -44,9 +45,9 @@ export default defineComponent({
   },
 
   async setup() {
-    const $route = inject('$route') as any
+    const $route = useRoute()
 
-    const { data } = await query(CategoriesByUrlKey, () => ({ urlKey: $route.params.urlKey }))
+    const { data } = await query(CategoriesByUrlKey, { urlKey: $route.params.urlKey })
 
     return {
       category: computed(() => data.value.categories.items[0]),

@@ -10,7 +10,7 @@ export default async (ctx) => {
   const app = createSSRApp(App)
 
   <%_ for (const [extension] of Object.entries(context.extensions)) { _%>
-    await <%- extension -%>(app)
+  await <%- extension -%>(app, ctx)
   <%_ } _%>
 
   const html = await renderToString(app, ctx)

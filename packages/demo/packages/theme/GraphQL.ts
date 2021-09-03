@@ -4,7 +4,10 @@ import { createFetcher } from '@fir/base/utils/CoreUtils'
 const endpoint = isServer ? 'https://venia.magento.com' : ''
 
 export const query = createFetcher({
-  argsParser: (query, variables = () => undefined) => [query, variables()],
+  argsParser: (query, variables = () => undefined) => [
+    query,
+    typeof variables === 'function' ? variables() : variables,
+  ],
   fetcher: async (query, variables = {}): Promise<any> => {
     const response = await fetch(`${endpoint}/graphql`, {
       method: 'POST',

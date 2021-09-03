@@ -96,38 +96,6 @@ test('supports layouts', async ({ page }) => {
   )
 })
 
-test('HMR', async ({ page }) => {
-  await makeProject(
-    {
-      packages: [
-        '@fir/base',
-        '@fir/router',
-        [
-          'my-package',
-          {
-            pages: {
-              'index.vue': '<template>Hello from index!</template>',
-            },
-          },
-        ],
-      ],
-    },
-    async ({ url, writeFile, rm }) => {
-      await page.goto(url + '/a')
-
-      await expect(page.locator('#app')).toHaveText('404')
-
-      await writeFile('my-package/pages/a.vue', '<template>A</template>')
-
-      await expect(page.locator('#app')).toHaveText('A')
-
-      await rm('my-package/pages/a.vue')
-
-      await expect(page.locator('#app')).toHaveText('404')
-    },
-  )
-})
-
 test('navigation between pages', async ({ page }) => {
   await makeProject(
     {
@@ -196,7 +164,6 @@ test('nested routes', async ({ page }) => {
       const response = await page.goto(url + '/a/b')
 
       expect(await response?.text()).toContain('Page AB')
-
       await expect(page.locator('#app')).toContainText('Page AB')
     },
   )
@@ -224,7 +191,6 @@ test('dynamic parameters', async ({ page }) => {
       const response = await page.goto(url + '/user/1234')
 
       expect(await response?.text()).toContain('User detail')
-
       await expect(page.locator('#app')).toContainText('User detail')
     },
   )
@@ -250,10 +216,9 @@ test('route with wildcard has lower priority than fully fixed route', async ({ p
       ],
     },
     async ({ url }) => {
-      const response1 = await page.goto(url + '/user/detail')
+      const response = await page.goto(url + '/user/detail')
 
-      expect(await response1?.text()).toContain('User fixed detail')
-
+      expect(await response?.text()).toContain('User fixed detail')
       await expect(page.locator('#app')).toContainText('User fixed detail')
     },
   )
@@ -278,11 +243,10 @@ test('route params can be rendered', async ({ page }) => {
       ],
     },
     async ({ url }) => {
-      const response1 = await page.goto(url + '/user/1234')
+      const response = await page.goto(url + '/user/12345')
 
-      expect(await response1?.text()).toContain('1234')
-
-      await expect(page.locator('#app')).toContainText('1234')
+      expect(await response?.text()).toContain('12345')
+      await expect(page.locator('#app')).toContainText('12345')
     },
   )
 })
