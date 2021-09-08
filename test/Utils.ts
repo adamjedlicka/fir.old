@@ -4,6 +4,7 @@ import { Server } from 'http'
 import { Application } from 'express'
 import getPort from 'get-port'
 import { Dev } from '@fir/core/src/Dev'
+import { Page } from '@playwright/test'
 
 interface MakeProjectConfig {
   packages: (string | any[])[]
@@ -19,6 +20,7 @@ interface MakeProjectCallbackOptions {
   url: string
   writeFile: (path: string, content: string) => Promise<void>
   rm: (path: string) => Promise<void>
+  get: (page: Page, path: string) => Promise<{ text: string }>
 }
 
 export const makeProject = async (config: MakeProjectConfig, callback: MakeProjectCallback): Promise<void> => {
@@ -44,15 +46,33 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
 
     const port = await getPort()
 
-    const server = app.listen(port)
+    const server = await new Promise<Server>((resolve) => {
+      const server = app.listen(port, () => {
+        resolve(server)
+      })
+    })
+
+    const url = `http://localhost:${port}`
 
     await callback({
       app,
       server,
-      url: `http://localhost:${port}`,
+      url,
       writeFile: (_path, _content) => writeFile(path.join(dir, _path), _content),
       rm: (_path) => fs.rm(path.join(dir, _path), { recursive: true }),
+      get: async (page: Page, path: string) => {
+        const location = url + path
+
+        const [response] = await Promise.all([fetch(location), page.goto(location)])
+
+        const text = await response.text()
+
+        return { text }
+      },
     })
+
+    await server.close()
+    await dev.close()
   })
 }
 
