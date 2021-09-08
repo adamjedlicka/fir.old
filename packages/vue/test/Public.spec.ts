@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from './Utils'
+import { makeProject } from '@fir/testing/Utils'
 
 test('serves static files from public directory', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir/vue',
         [
           'my-package',
           {
@@ -28,7 +28,7 @@ test('overrides files with same name', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir/vue',
         [
           'my-package-a',
           {

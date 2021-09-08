@@ -131,7 +131,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import Title from '@fir/base/components/Title.vue'
+import Title from '@fir/vue/components/Title.vue'
 import ProductsByUrlKey from '../../gql/queries/ProductsByUrlKey.gql'
 import { query } from '../../GraphQL'
 

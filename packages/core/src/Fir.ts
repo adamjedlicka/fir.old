@@ -4,7 +4,6 @@ import devalue from 'devalue'
 import fetch from 'node-fetch'
 import { Package } from './Package'
 import { Concept } from './Concept'
-import { SSRContext } from '@vue/server-renderer'
 import { mergeConfig, UserConfig } from 'vite'
 import { Request, Response, RequestHandler } from 'express'
 
@@ -16,7 +15,7 @@ interface Config {
   packages?: string[]
 }
 
-export interface AppContext extends SSRContext {
+export interface AppContext {
   req: Request
   payload: Record<string, any>
   head: Record<string, any>
@@ -124,7 +123,7 @@ export abstract class Fir {
 
     const seen = new Set()
 
-    for (const module of ctx.modules) {
+    for (const module of ctx.modules ?? []) {
       const files = manifest[module]
 
       if (!files) continue

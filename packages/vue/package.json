@@ -1,5 +1,5 @@
 {
-  "name": "@fir/base",
+  "name": "@fir/vue",
   "version": "0.1.0",
   "dependencies": {
     "@vitejs/plugin-vue": "^1.2.2",

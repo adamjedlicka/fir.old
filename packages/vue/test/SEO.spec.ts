@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from './Utils'
+import { makeProject } from '@fir/testing/Utils'
 
 test('title', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/router',
+        '@fir/vue',
+        '@fir/vue-router',
         [
           'my-package',
           {
@@ -17,7 +17,7 @@ test('title', async ({ page }) => {
                   <h1>Hello, World!</h1>
                 </template>
                 <script>
-                import Title from '@fir/base/components/Title.vue'
+                import Title from '@fir/vue/components/Title.vue'
                 export default {
                   components: {
                     Title,
@@ -42,8 +42,8 @@ test('title updates when navigating pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/router',
+        '@fir/vue',
+        '@fir/vue-router',
         [
           'my-package',
           {
@@ -55,7 +55,7 @@ test('title updates when navigating pages', async ({ page }) => {
                   <RouterLink to="/second">link</RouterLink>
                 </template>
                 <script>
-                import Title from '@fir/base/components/Title.vue'
+                import Title from '@fir/vue/components/Title.vue'
                 export default {
                   components: {
                     Title,
@@ -68,8 +68,8 @@ test('title updates when navigating pages', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      await page.goto(url + '/first')
+    async ({ get }) => {
+      await get(page, '/first')
       await expect(page.locator('title')).toContainText('first')
       await page.locator('a').click()
       await expect(page.locator('title')).toContainText('second')
