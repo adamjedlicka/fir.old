@@ -1,5 +1,5 @@
 {
-  "name": "@fir/router",
+  "name": "@fir/vue-router",
   "version": "0.1.0",
   "dependencies": {
     "vue-router": "4"

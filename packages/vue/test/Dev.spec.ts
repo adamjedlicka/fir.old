@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from './Utils'
+import { makeProject } from '@fir/testing/Utils'
 
 test('serves an app', async ({ page }) => {
   await makeProject(
     {
-      packages: ['@fir/base'],
+      packages: ['@fir/vue'],
     },
     async ({ url }) => {
       await page.goto(url)
@@ -17,7 +17,7 @@ test('supports payload', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir/vue',
         [
           'ma-package',
           {
@@ -27,7 +27,7 @@ test('supports payload', async ({ page }) => {
                   <div>Hello, World!</div>
                 </template>
                 <script>
-                import { usePayload } from '@fir/base/compositions/Payload'
+                import { usePayload } from '@fir/vue/compositions/Payload'
                 export default {
                   setup: () => {
                     const payload = usePayload()
@@ -52,7 +52,7 @@ test('supports custom fetchers', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir/vue',
         [
           'ma-package',
           {
@@ -62,7 +62,7 @@ test('supports custom fetchers', async ({ page }) => {
                   <div>some {{ data }} here</div>
                 </template>
                 <script>
-                import { createFetcher } from '@fir/base/utils/CoreUtils'
+                import { createFetcher } from '@fir/vue/utils/CoreUtils'
                 const useFetcher = createFetcher({
                   fetcher: async () => 'data'
                 })
@@ -93,7 +93,7 @@ test('supports ejs templates', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir/vue',
         [
           'my-package',
           {
