@@ -68,8 +68,8 @@ test('title updates when navigating pages', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      await page.goto(url + '/first')
+    async ({ get }) => {
+      await get(page, '/first')
       await expect(page.locator('title')).toContainText('first')
       await page.locator('a').click()
       await expect(page.locator('title')).toContainText('second')

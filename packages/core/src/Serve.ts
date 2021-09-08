@@ -19,7 +19,7 @@ export class Serve extends Fir {
 
     server.use('/assets', express.static(path.join(this.getDistDir(), 'client', 'assets')))
 
-    server.use(...(this.context.public ?? []))
+    if (this.context.public) server.use(...(this.context.public ?? []))
 
     for (const [path, middleware] of Object.entries(this.context.routes ?? {})) {
       server.use(`/${path}`, middleware as Application)

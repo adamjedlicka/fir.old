@@ -37,7 +37,7 @@ export class Build extends Fir {
         clearScreen: false,
         root: this.getBuildDir(),
         build: {
-          ssr: 'entry-server.ts',
+          ssr: 'entry-server',
           outDir: path.join(this.getDistDir(), 'server'),
           emptyOutDir: false,
         },
