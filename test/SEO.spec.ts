@@ -30,9 +30,9 @@ test('title', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      const response = await page.goto(url)
-      await expect(await response?.text()).toContain('<title>My custom title</title>')
+    async ({ get }) => {
+      const { text } = await get(page, '/')
+      expect(text).toContain('<title>My custom title</title>')
       await expect(page.locator('title')).toContainText('My custom title')
     },
   )

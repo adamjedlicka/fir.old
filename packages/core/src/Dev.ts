@@ -9,7 +9,7 @@ export class Dev extends Fir {
   async createServer(): Promise<Application> {
     const viteDevServer = await createServer(
       this.buildConfig({
-        server: { middlewareMode: true },
+        server: { middlewareMode: true, hmr: false },
         clearScreen: false,
         root: this.getBuildDir(),
         logLevel: process.env.NODE_ENV === 'test' ? 'silent' : undefined,

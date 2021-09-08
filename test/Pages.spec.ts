@@ -17,9 +17,10 @@ test('supports pages concept', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      await page.goto(url)
-      await expect(page.locator('#app')).toHaveText('Hello from index!')
+    async ({ get }) => {
+      const { text } = await get(page, '/')
+      expect(text).toContain('Hello from index!')
+      await expect(page.locator('#app')).toContainText('Hello from index!')
     },
   )
 })
@@ -42,9 +43,10 @@ test('supports multiple pages', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      await page.goto(url + '/b')
-      await expect(page.locator('#app')).toHaveText('Hello from B!')
+    async ({ get }) => {
+      const { text } = await get(page, '/b')
+      expect(text).toContain('Hello from B!')
+      await expect(page.locator('#app')).toContainText('Hello from B!')
     },
   )
 })
@@ -65,9 +67,10 @@ test('has default 404', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      await page.goto(url + '/b')
-      await expect(page.locator('#app')).toHaveText('404')
+    async ({ get }) => {
+      const { text } = await get(page, '/b')
+      expect(text).toContain('404')
+      await expect(page.locator('#app')).toContainText('404')
     },
   )
 })
@@ -89,9 +92,12 @@ test('supports layouts', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      await page.goto(url + '/')
-      await expect(page.locator('#app')).toHaveText('Hello from layout!Hello from index!')
+    async ({ get }) => {
+      const { text } = await get(page, '/')
+      expect(text).toContain('Hello from layout!')
+      expect(text).toContain('Hello from index!')
+      await expect(page.locator('#app')).toContainText('Hello from layout!')
+      await expect(page.locator('#app')).toContainText('Hello from index!')
     },
   )
 })
@@ -160,10 +166,9 @@ test('nested routes', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      const response = await page.goto(url + '/a/b')
-
-      expect(await response?.text()).toContain('Page AB')
+    async ({ get }) => {
+      const { text } = await get(page, '/a/b')
+      expect(text).toContain('Page AB')
       await expect(page.locator('#app')).toContainText('Page AB')
     },
   )
@@ -187,10 +192,9 @@ test('dynamic parameters', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      const response = await page.goto(url + '/user/1234')
-
-      expect(await response?.text()).toContain('User detail')
+    async ({ get }) => {
+      const { text } = await get(page, '/user/1234')
+      expect(text).toContain('User detail')
       await expect(page.locator('#app')).toContainText('User detail')
     },
   )
@@ -215,10 +219,9 @@ test('route with wildcard has lower priority than fully fixed route', async ({ p
         ],
       ],
     },
-    async ({ url }) => {
-      const response = await page.goto(url + '/user/detail')
-
-      expect(await response?.text()).toContain('User fixed detail')
+    async ({ get }) => {
+      const { text } = await get(page, '/user/detail')
+      expect(text).toContain('User fixed detail')
       await expect(page.locator('#app')).toContainText('User fixed detail')
     },
   )
@@ -242,10 +245,9 @@ test('route params can be rendered', async ({ page }) => {
         ],
       ],
     },
-    async ({ url }) => {
-      const response = await page.goto(url + '/user/12345')
-
-      expect(await response?.text()).toContain('12345')
+    async ({ get }) => {
+      const { text } = await get(page, '/user/12345')
+      expect(text).toContain('12345')
       await expect(page.locator('#app')).toContainText('12345')
     },
   )
