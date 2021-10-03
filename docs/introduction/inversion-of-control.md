@@ -1,0 +1,3 @@
+# Inversion of control
+
+Inversion of control is very well known design pattern in the programming world. So how does Fir use it? Image you have two components. Header.vue and SearchBar.vue. Instead of importing SearchBar.vue from Header.vue via its relative path like this: `import SearchBar from './SearchBart.vue'`, in Fir its imported like this: `import SearchBar from '~/components/SearchBar.vue`. This means we only specify what we want to import but not where to import it from. This gives Fir great power because it can use for example overloading rules where if two modules have same component, module that is loaded later will supply that component allowing use to change behavior of modules without modifying them.

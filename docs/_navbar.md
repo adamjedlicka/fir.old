@@ -1,2 +1,0 @@
-- [Home](/)
-- [GitHub](https://github.com/adamjedlicka/fir ':target=_blank')
