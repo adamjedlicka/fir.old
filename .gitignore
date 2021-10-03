@@ -1,3 +1,5 @@
 node_modules/
 .fir/
 .test/
+
+yarn-error.log

@@ -1,6 +1,8 @@
 {
   "name": "@fir/vue-router",
   "version": "0.1.0",
+  "author": "Adam Jedlička <mail@adamjedlicka.cz>",
+  "license": "MIT",
   "dependencies": {
     "vue-router": "4"
   }

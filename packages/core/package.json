@@ -1,9 +1,8 @@
 {
   "name": "@fir/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
-  "private": true,
   "main": "index.ts",
   "bin": {
     "fir": "./fir.js"
