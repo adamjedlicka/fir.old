@@ -1,7 +1,7 @@
 <p align="center">
-  <img width="460" height="300" src="https://github.com/adamjedlicka/fir/blob/master/docs/_media/fir.svg?raw=true" alt="logo">
+  <img width="460" height="300" src="https://github.com/adamjedlicka/fir/blob/master/docs/public/logo.svg?raw=true" alt="logo">
 </p>
 
-# Fir
+# Fir.js
 
-Opinionated meta-framework with SSR and clean architecture
+Framework agnostic meta-framework for server-side rendered applications
