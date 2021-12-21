@@ -19,6 +19,6 @@
     "docsify-cli": "^4.4.3",
     "ts-node": "^10.2.0",
     "typescript": "^4.2.4",
-    "vitepress": "^0.19.2"
+    "vitepress": "^0.20.9"
   }
 }
