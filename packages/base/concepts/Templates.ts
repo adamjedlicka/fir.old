@@ -28,6 +28,6 @@ export default class Templates extends GeneratingConcept {
   }
 
   async onChange(pkg: Package, file: string) {
-    await this.renderTemplate(file)
+    await this.renderTemplate(file, this.fir)
   }
 }
