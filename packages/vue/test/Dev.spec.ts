@@ -4,7 +4,7 @@ import { makeProject } from '@fir/testing/Utils'
 test('serves an app', async ({ page }) => {
   await makeProject(
     {
-      packages: ['@fir/vue'],
+      packages: ['@fir/base', '@fir/vue'],
     },
     async ({ url }) => {
       await page.goto(url)
@@ -17,6 +17,7 @@ test('supports payload', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         [
           'ma-package',
@@ -52,6 +53,7 @@ test('supports custom fetchers', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         [
           'ma-package',
@@ -93,6 +95,7 @@ test('supports ejs templates', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         [
           'my-package',

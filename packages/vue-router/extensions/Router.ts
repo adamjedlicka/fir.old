@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 import { isServer } from '@fir/core'
-import { routes } from '/Pages'
+import { routes } from '/_Pages'
 
 export default async (app: App, ctx) => {
   const router = createRouter({

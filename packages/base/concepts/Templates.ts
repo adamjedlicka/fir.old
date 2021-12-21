@@ -14,12 +14,11 @@ export default class Templates extends GeneratingConcept {
   async afterAll() {
     await super.afterAll()
 
-    await Promise.all([
-      this.renderTemplate('App.vue.ejs', this.fir),
-      this.renderTemplate('entry-client.ts.ejs', this.fir),
-      this.renderTemplate('entry-server.ts.ejs', this.fir),
-      this.renderTemplate('index.html.ejs', this.fir),
-    ])
+    await Promise.all(
+      Object.keys(this.fir.context.templates)
+        .filter((template) => !template.startsWith('_'))
+        .map((template) => this.renderTemplate(template, this.fir)),
+    )
   }
 
   async generate(files) {

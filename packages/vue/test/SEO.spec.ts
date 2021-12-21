@@ -5,6 +5,7 @@ test('title', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -42,6 +43,7 @@ test('title updates when navigating pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [

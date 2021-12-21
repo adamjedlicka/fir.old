@@ -8,7 +8,7 @@
 
 <script>
 import { computed, defineComponent, useSSRContext, ref, provide, reactive, watchEffect } from 'vue'
-import { layout, pages } from '/Pages'
+import { layout, pages } from '/_Pages'
 
 export default defineComponent({
   setup() {

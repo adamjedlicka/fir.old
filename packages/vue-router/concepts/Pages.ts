@@ -16,7 +16,7 @@ export default class Pages extends GeneratingConcept {
 
     const layout = files.find((file) => file.ident === '_layout')
 
-    await this.renderTemplate('Pages.ts.ejs', { pages, layout })
+    await this.renderTemplate('_Pages.ts.ejs', { pages, layout })
   }
 
   processFile(pkg: Package, file: string): any {

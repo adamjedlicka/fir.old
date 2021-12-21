@@ -5,6 +5,7 @@ test('vite config merging', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [

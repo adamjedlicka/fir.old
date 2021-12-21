@@ -5,6 +5,7 @@ test('serves static files from public directory', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         [
           'my-package',
@@ -28,6 +29,7 @@ test('overrides files with same name', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         [
           'my-package-a',

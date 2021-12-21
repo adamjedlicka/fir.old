@@ -198,11 +198,3 @@
     </div>
   </footer>
 </template>
-
-<script>
-throw new Error('WOT WOT')
-
-export default {
-
-}
-</script>

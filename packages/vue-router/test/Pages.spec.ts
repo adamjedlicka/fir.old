@@ -5,6 +5,7 @@ test('supports pages concept', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -29,6 +30,7 @@ test('supports multiple pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -55,6 +57,7 @@ test('has default 404', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -79,6 +82,7 @@ test('supports layouts', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -106,6 +110,7 @@ test('navigation between pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -152,6 +157,7 @@ test('nested routes', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -178,6 +184,7 @@ test('dynamic parameters', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -204,6 +211,7 @@ test('route with wildcard has lower priority than fully fixed route', async ({ p
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [
@@ -231,6 +239,7 @@ test('route params can be rendered', async ({ page }) => {
   await makeProject(
     {
       packages: [
+        '@fir/base',
         '@fir/vue',
         '@fir/vue-router',
         [

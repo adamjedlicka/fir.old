@@ -821,6 +821,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fir/base@workspace:packages/base":
+  version: 0.0.0-use.local
+  resolution: "@fir/base@workspace:packages/base"
+  languageName: unknown
+  linkType: soft
+
 "@fir/core@workspace:*, @fir/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@fir/core@workspace:packages/core"

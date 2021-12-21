@@ -1,3 +1,3 @@
 export default {
-  packages: ['@fir/vue', '@fir/vue-router', './packages/theme'],
+  packages: ['@fir/base', '@fir/vue', '@fir/vue-router', './packages/theme'],
 }
