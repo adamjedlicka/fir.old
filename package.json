@@ -5,6 +5,7 @@
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
   "private": true,
+  "packageManager": "yarn@3.1.1",
   "workspaces": [
     "packages/*"
   ],
@@ -15,6 +16,7 @@
     "docs:serve": "vitepress serve docs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.14.1",
     "@types/node": "^17.0.2",
     "docsify-cli": "^4.4.3",
     "ts-node": "^10.2.0",

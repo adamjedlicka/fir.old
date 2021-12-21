@@ -4,7 +4,6 @@
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.14.1",
     "get-port": "^5.1.1"
   }
 }

@@ -31,9 +31,7 @@ export class Serve extends Fir {
       } catch (e) {
         const youch = new Youch(e, req)
 
-        const [html, json] = await Promise.all([youch.toHTML(), youch.toJSON()])
-
-        console.error(json.error.name, json.error.message)
+        const html = await youch.toHTML()
 
         res.status(500).end(html)
       }
