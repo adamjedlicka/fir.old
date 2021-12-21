@@ -1,32 +1,29 @@
 import path from 'path'
 import fs from 'fs/promises'
-import devalue from 'devalue'
 import fetch from 'node-fetch'
 import { Package } from './Package'
 import { Concept } from './Concept'
 import { mergeConfig, UserConfig } from 'vite'
-import { Request, Response, RequestHandler } from 'express'
+import { Request, Response } from 'express'
 
 global.fetch = fetch
-global.__require = require
 
 interface Config {
   dir: string
   packages?: string[]
 }
 
-export interface AppContext {
-  req: Request
-  payload: Record<string, any>
-  head: Record<string, any>
-  id: () => string
-}
-
-interface RequestOptions {
+interface RequestInput {
   template: string
-  entry: (ctx: AppContext) => Promise<string>
+  req: Request
   manifest?: Record<string, string[]>
 }
+
+interface RequestOutput {
+  html: string
+}
+
+type Entry = (requestInput: RequestInput) => Promise<RequestOutput>
 
 export abstract class Fir {
   protected dir: string
@@ -87,78 +84,14 @@ export abstract class Fir {
     return true
   }
 
-  async handleRequest(req: Request, res: Response, next: RequestHandler, opts: RequestOptions) {
-    let _id = 0
-
-    const ctx: AppContext = {
-      req,
-      payload: {},
-      head: {},
-      id: () => String(++_id),
-    }
-
-    const appHtml = await opts.entry(ctx)
-
-    const preloadLinks = this.preloadLinks(ctx, opts.manifest)
-
-    const payload = `<script>window.__PAYLOAD__ = ${devalue(ctx.payload)}</script>`
-
-    const head = this.renderHead(ctx.head)
-
-    const html = opts.template
-      .replace('<!--app-html-->', appHtml)
-      .replace('<!--preload-links-->', preloadLinks)
-      .replace('<!--payload-->', payload)
-      .replace('<!--head-->', head)
+  async handleRequest(entry: Entry, requestInput: RequestInput, res: Response) {
+    const { html } = await entry(requestInput)
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   }
 
   protected buildConfig(viteConfig: UserConfig): Record<string, any> {
     return mergeConfig(this.viteConfig, viteConfig, true)
-  }
-
-  protected preloadLinks(ctx, manifest = {}): string {
-    let links = ''
-
-    const seen = new Set()
-
-    for (const module of ctx.modules ?? []) {
-      const files = manifest[module]
-
-      if (!files) continue
-
-      for (const file of files) {
-        if (seen.has(file)) continue
-
-        seen.add(file)
-
-        links += this.renderPreloadLink(file)
-      }
-    }
-
-    return links
-  }
-
-  protected renderPreloadLink(file: string): string {
-    if (file.endsWith('.js')) {
-      return `<link rel="modulepreload" crossorigin href="${file}">`
-    } else if (file.endsWith('.css')) {
-      return `<link rel="stylesheet" href="${file}">`
-    } else {
-      // TODO
-      return ''
-    }
-  }
-
-  protected renderHead(head: Record<string, any>): string {
-    let rendered = ''
-
-    for (const [key, value] of Object.entries(head)) {
-      rendered += `<${key}>${value}</${key}>`
-    }
-
-    return rendered
   }
 
   async close() {

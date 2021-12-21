@@ -28,7 +28,7 @@ export class Dev extends Fir {
 
     server.use(viteDevServer.middlewares)
 
-    server.get('*', async (req, res, next) => {
+    server.get('*', async (req, res) => {
       try {
         const url = req.originalUrl
 
@@ -37,7 +37,7 @@ export class Dev extends Fir {
 
         const { default: entry } = await viteDevServer.ssrLoadModule('/entry-server')
 
-        return await this.handleRequest(req, res, next, { template, entry })
+        return await this.handleRequest(entry, { template, req }, res)
       } catch (e) {
         viteDevServer.ssrFixStacktrace(e)
 

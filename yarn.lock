@@ -837,7 +837,6 @@ __metadata:
     "@types/lodash": ^4.14.170
     chokidar: ^3.5.1
     compression: ^1.7.4
-    devalue: ^2.0.1
     ejs: ^3.1.6
     express: ^4.17.1
     glob: ^7.1.7
@@ -885,6 +884,7 @@ __metadata:
     "@vitejs/plugin-vue": ^2.0.1
     "@vue/compiler-sfc": ^3.2.0
     "@vue/server-renderer": ^3.2.0
+    devalue: ^2.0.1
     vite: "*"
     vue: ^3.2.0
   languageName: unknown

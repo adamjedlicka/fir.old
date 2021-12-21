@@ -25,9 +25,9 @@ export class Serve extends Fir {
       server.use(`/${path}`, middleware as Application)
     }
 
-    server.get('*', async (req, res, next) => {
+    server.get('*', async (req, res) => {
       try {
-        return await this.handleRequest(req, res, next, { template, entry, manifest })
+        return await this.handleRequest(entry, { template, req, manifest }, res)
       } catch (e) {
         const youch = new Youch(e, req)
 

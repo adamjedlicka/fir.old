@@ -1,8 +1,11 @@
 import ReactDOMServer from 'react-dom/server'
 import App from './App'
 
-export default (ctx) => {
-  const html = ReactDOMServer.renderToString(<App />)
+export default ({ template }) => {
+  const appHtml = ReactDOMServer.renderToString(<App />)
 
-  return html
+  const html = template
+    .replace('<!--app-html-->', appHtml)
+
+  return { html }
 }
