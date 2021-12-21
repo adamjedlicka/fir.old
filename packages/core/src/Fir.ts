@@ -39,7 +39,7 @@ export abstract class Fir {
     plugins: [
       {
         name: 'fir',
-        transform(code, id, ssr) {
+        transform(code, id, { ssr } = {}) {
           if (id.endsWith(path.join('core', 'index.ts'))) {
             return code.replace(/__IS_SERVER__/, String(ssr))
           }
