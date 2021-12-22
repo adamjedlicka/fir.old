@@ -28,7 +28,7 @@ export class Dev extends Fir {
 
     server.use(viteDevServer.middlewares)
 
-    server.get('*', async (req, res) => {
+    server.get('*', async (req, res, next) => {
       try {
         const url = req.originalUrl
 
@@ -41,11 +41,15 @@ export class Dev extends Fir {
       } catch (e) {
         viteDevServer.ssrFixStacktrace(e)
 
-        const youch = new Youch(e, req)
+        if (process.env.NODE_ENV === 'test') {
+          next(e)
+        } else {
+          const youch = new Youch(e, req)
 
-        const html = await youch.toHTML()
+          const html = await youch.toHTML()
 
-        res.status(500).end(html)
+          res.status(500).end(html)
+        }
 
         viteDevServer.restart()
       }

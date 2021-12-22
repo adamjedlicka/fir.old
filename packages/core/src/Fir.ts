@@ -91,7 +91,13 @@ export abstract class Fir {
   }
 
   protected buildConfig(viteConfig: UserConfig): Record<string, any> {
-    return mergeConfig(this.viteConfig, viteConfig, true)
+    const config = mergeConfig(this.viteConfig, viteConfig, true)
+
+    if (process.env.NODE_ENV === 'test') {
+      config.cacheDir = path.join(this.dir, '.vite')
+    }
+
+    return config
   }
 
   async close() {
