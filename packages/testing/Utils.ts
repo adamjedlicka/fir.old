@@ -70,6 +70,9 @@ export const makeProject = async (config: MakeProjectConfig, callback: MakeProje
         return { text }
       },
     })
+
+    await server.close()
+    await dev.close()
   })
 }
 
