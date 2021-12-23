@@ -40,7 +40,7 @@ export abstract class Fir {
       {
         name: 'fir',
         transform(code, id, { ssr } = {}) {
-          if (id.endsWith(path.join('core', 'index.ts'))) {
+          if (id.includes(path.join('@fir-js', 'core', 'index.ts'))) {
             return code.replace(/__IS_SERVER__/, String(ssr))
           }
 
