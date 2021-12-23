@@ -29,6 +29,8 @@ export abstract class Fir {
   protected dir: string
   protected packages: string[]
   protected closeHandlers: (() => Promise<void>)[] = []
+  protected loadedPackages: Record<string, Package> = {}
+  protected loadedConcepts: Record<string, Concept> = {}
 
   public context: Record<string, any> = {}
 
@@ -55,26 +57,23 @@ export abstract class Fir {
   async bootstrap(): Promise<boolean> {
     await fs.mkdir(this.getBuildDir(), { recursive: true })
 
-    const packages: Record<string, Package> = {}
-    const concepts: Record<string, Concept> = {}
-
     for (const pkg of this.packages) {
       const resolved = await this.resolvePackage(pkg)
       const loaded = await this.loadPackage(resolved)
 
-      packages[loaded.getId()] = loaded
+      this.loadedPackages[loaded.getId()] = loaded
 
       this.viteConfig = mergeConfig(this.viteConfig, await loaded.getViteConfig())
 
       for (const concept of await this.loadConcepts(loaded)) {
-        concepts[concept.directory()] = concept
+        this.loadedConcepts[concept.directory()] = concept
       }
     }
 
-    for (const concept of Object.values(concepts)) {
+    for (const concept of Object.values(this.loadedConcepts)) {
       await concept.beforeAll()
 
-      for (const pkg of Object.values(packages)) {
+      for (const pkg of Object.values(this.loadedPackages)) {
         await concept.run(pkg)
       }
 

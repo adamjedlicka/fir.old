@@ -6,7 +6,6 @@ test('serves static files from public directory', async ({ page }) => {
     {
       packages: [
         '@fir/base',
-        '@fir/vue',
         [
           'my-package',
           {
@@ -30,7 +29,6 @@ test('overrides files with same name', async ({ page }) => {
     {
       packages: [
         '@fir/base',
-        '@fir/vue',
         [
           'my-package-a',
           {

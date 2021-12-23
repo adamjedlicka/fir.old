@@ -1,6 +1,7 @@
 import path from 'path'
 import ejs from 'ejs'
 import fs from 'fs/promises'
+import { Express } from 'express'
 import { Fir } from './Fir'
 import { Package } from './Package'
 
@@ -26,6 +27,10 @@ export abstract class Concept {
   }
 
   async afterAll() {
+    // Do nothing...
+  }
+
+  async applyMiddleware(server: Express): Promise<void> {
     // Do nothing...
   }
 

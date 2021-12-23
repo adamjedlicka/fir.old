@@ -19,7 +19,7 @@ export abstract class GeneratingConcept extends Concept {
     const files = {}
 
     for (const file of await pkg.getFiles(this.directory())) {
-      files[file] = this.processFile(pkg, file)
+      files[file] = await this.processFile(pkg, file)
     }
 
     this.packages.push([pkg, files])
@@ -32,7 +32,7 @@ export abstract class GeneratingConcept extends Concept {
       watcher.on('add', async (_path) => {
         const file = path.basename(_path)
 
-        files[file] = this.processFile(pkg, file)
+        files[file] = await this.processFile(pkg, file)
 
         await this.onAdd(pkg, file)
       })
@@ -54,6 +54,8 @@ export abstract class GeneratingConcept extends Concept {
       this.fir.onClose(async () => {
         await watcher.close()
       })
+
+      await new Promise((resolve) => watcher.on('ready', resolve))
     }
   }
 
@@ -65,12 +67,12 @@ export abstract class GeneratingConcept extends Concept {
     // Do nothing...
   }
 
-  processFile(pkg: Package, file: string): any {
+  async processFile(pkg: Package, file: string): Promise<any> {
     return pkg.pathResolve(this.directory(), file)
   }
 
   async onAdd(pkg: Package, file: string) {
-    await this._generate(this.getFiles())
+    await this.generate(this.getFiles())
   }
 
   async onChange(pkg: Package, file: string) {}

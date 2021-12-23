@@ -18,12 +18,8 @@ export class Dev extends Fir {
 
     const server = express()
 
-    if (this.context.public) {
-      server.use(...(this.context.public ?? []))
-    }
-
-    for (const [path, middleware] of Object.entries(this.context.routes ?? {})) {
-      server.use(`/${path}`, middleware as Application)
+    for (const concept of Object.values(this.loadedConcepts)) {
+      await concept.applyMiddleware(server)
     }
 
     server.use(viteDevServer.middlewares)
