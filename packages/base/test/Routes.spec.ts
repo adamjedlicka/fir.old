@@ -58,3 +58,39 @@ test('HMR', async ({ page }) => {
     },
   )
 })
+
+test('module overloading', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir/base',
+        [
+          'my-package',
+          {
+            routes: {
+              'hello.ts': `
+                export default function (req, res) {
+                  res.send('Hello, World!')
+                }`,
+            },
+          },
+        ],
+        [
+          'my-package-overload',
+          {
+            routes: {
+              'hello.ts': `
+                export default function (req, res) {
+                  res.send('Hello, Overload!')
+                }`,
+            },
+          },
+        ],
+      ],
+    },
+    async ({ get }) => {
+      const { text } = await get(page, '/hello')
+      await expect(text).toBe('Hello, Overload!')
+    },
+  )
+})
