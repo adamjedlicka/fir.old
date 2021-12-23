@@ -21,6 +21,7 @@ interface RequestInput {
 
 interface RequestOutput {
   html: string
+  error: Error | null
 }
 
 type Entry = (requestInput: RequestInput) => Promise<RequestOutput>
@@ -84,7 +85,9 @@ export abstract class Fir {
   }
 
   async handleRequest(entry: Entry, requestInput: RequestInput, res: Response) {
-    const { html } = await entry(requestInput)
+    const { html, error } = await entry(requestInput)
+
+    if (error) throw error
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   }

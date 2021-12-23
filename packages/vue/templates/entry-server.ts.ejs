@@ -9,6 +9,7 @@ import <%- extension -%> from '<%- path -%>'
 
 export default async ({ template, req, manifest }) => {
   let _id = 0
+  let _err = null
 
   const ctx = {
     req,
@@ -18,6 +19,10 @@ export default async ({ template, req, manifest }) => {
   }
 
   const app = createSSRApp(App)
+
+  app.config.errorHandler = (err) => {
+    _err = err
+  }
 
   <%_ for (const [extension] of Object.entries(context.extensions)) { _%>
   await <%- extension -%>(app, ctx)
@@ -29,7 +34,7 @@ export default async ({ template, req, manifest }) => {
     .replace('<!--payload-->', `<script>window.__PAYLOAD__ = ${devalue(ctx.payload)}</script>`)
     .replace('<!--head-->', renderHead(ctx.head))
 
-  return { html }
+  return { html, error: _err }
 }
 
 function preloadLinks(ctx, manifest = {}): string {
