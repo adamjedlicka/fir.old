@@ -1,0 +1,15 @@
+{
+  "name": "create-fir",
+  "version": "0.1.0",
+  "author": "Adam Jedlička <mail@adamjedlicka.cz>",
+  "license": "MIT",
+  "bin": "index.js",
+  "files": [
+    "index.js",
+    "template-*"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "fs-extra": "^10.0.0"
+  }
+}

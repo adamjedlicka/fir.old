@@ -1,0 +1,15 @@
+{
+  "name": "fir-vue-starter",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "fir dev",
+    "build": "fir build",
+    "serve": "fir serve"
+  },
+  "dependencies": {
+    "@fir-js/base": "*",
+    "@fir-js/core": "*",
+    "@fir-js/vue-router": "*",
+    "@fir-js/vue": "*"
+  }
+}

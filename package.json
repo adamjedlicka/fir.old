@@ -19,7 +19,6 @@
     "@playwright/test": "^1.14.1",
     "@types/node": "^17.0.2",
     "docsify-cli": "^4.4.3",
-    "ts-node": "^10.2.0",
     "typescript": "^4.2.4",
     "vitepress": "^0.20.9"
   }
