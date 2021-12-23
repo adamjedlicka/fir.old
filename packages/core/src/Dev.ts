@@ -8,7 +8,7 @@ import Youch from 'youch'
 export class Dev extends Fir {
   async createServer(): Promise<Application> {
     const config = this.buildConfig({
-      server: { middlewareMode: true, hmr: false },
+      server: { middlewareMode: true },
       clearScreen: false,
       root: this.getBuildDir(),
       logLevel: process.env.NODE_ENV === 'test' ? 'silent' : undefined,

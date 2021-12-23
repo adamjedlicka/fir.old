@@ -117,3 +117,38 @@ test('supports ejs templates', async ({ page }) => {
     },
   )
 })
+
+test('HMR', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir/base',
+        '@fir/vue',
+        '@fir/vue-router',
+        [
+          'my-package',
+          {
+            pages: {
+              'index.vue': `
+                <template>
+                  <h1>Hello, A!</h1>
+                </template>
+              `,
+            },
+          },
+        ],
+      ],
+    },
+    async ({ url, writeFile }) => {
+      await page.goto(url)
+      await writeFile(
+        'my-package/pages/index.vue',
+        `
+        <template>
+          <h1>Hello, B!</h1>
+        </template>`,
+      )
+      await expect(page.locator('h1')).toHaveText('Hello, B!')
+    },
+  )
+})
