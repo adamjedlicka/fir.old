@@ -1,6 +1,6 @@
 {
   "name": "@fir-js/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
   "main": "index.ts",
