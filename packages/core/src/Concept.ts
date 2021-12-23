@@ -53,4 +53,8 @@ export abstract class Concept {
   protected getDestinationFor(file: string): string {
     return path.join(path.basename(file.replace(/\.ejs$/, '')))
   }
+
+  protected getRelativePathForFile(pkg: Package, file: string): string {
+    return path.relative(this.fir.getBuildDir(), pkg.pathResolve(this.directory(), file))
+  }
 }

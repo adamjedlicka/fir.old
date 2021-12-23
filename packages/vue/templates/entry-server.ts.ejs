@@ -1,6 +1,6 @@
 import devalue from 'devalue'
 import { createSSRApp } from 'vue'
-import { renderToString } from '@vue/server-renderer'
+import { renderToString } from 'vue/server-renderer'
 import App from './App.vue'
 
 <%_ for (const [extension, path] of Object.entries(context.extensions)) { _%>

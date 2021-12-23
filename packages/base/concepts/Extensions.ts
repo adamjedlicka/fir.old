@@ -13,7 +13,7 @@ export default class Extensions extends Concept {
 
   async run(pkg: Package) {
     for (const file of await pkg.getFiles(this.directory())) {
-      const extension = path.relative(this.fir.getBuildDir(), pkg.pathResolve(this.directory(), file))
+      const extension = this.getRelativePathForFile(pkg, file)
 
       this.fir.context.extensions[path.parse(file).name] = extension
     }

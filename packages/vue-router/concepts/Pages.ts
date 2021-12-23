@@ -22,7 +22,7 @@ export default class Pages extends GeneratingConcept {
   processFile(pkg: Package, file: string): any {
     const parsed = path.parse(file)
     const parts = [...parsed.dir.split('/').filter(Boolean), parsed.name]
-    const component = pkg.pathResolve(this.directory(), file)
+    const component = this.getRelativePathForFile(pkg, file)
 
     return {
       ident: this.getIdent(parts),

@@ -3,9 +3,5 @@
   "version": "0.1.0",
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
-  "private": true,
-  "dependencies": {
-    "vite": "*",
-    "vue": "*"
-  }
+  "private": true
 }

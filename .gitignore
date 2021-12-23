@@ -1,6 +1,7 @@
 node_modules/
 .fir/
 .test/
+.vite/
 
 yarn-error.log
 

@@ -5,10 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@vitejs/plugin-vue": "^2.0.1",
-    "@vue/compiler-sfc": "^3.2.0",
-    "@vue/server-renderer": "^3.2.0",
     "devalue": "^2.0.1",
-    "vite": "*",
     "vue": "^3.2.0"
   }
 }
