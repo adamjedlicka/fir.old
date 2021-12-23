@@ -1,0 +1,9 @@
+{
+  "name": "@fir/vue-pinia",
+  "version": "0.1.0",
+  "author": "Adam Jedlička <mail@adamjedlicka.cz>",
+  "license": "MIT",
+  "dependencies": {
+    "pinia": "^2.0.0"
+  }
+}

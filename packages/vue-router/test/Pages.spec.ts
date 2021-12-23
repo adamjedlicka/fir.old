@@ -12,7 +12,7 @@ test('supports pages concept', async ({ page }) => {
           'my-package',
           {
             pages: {
-              'index.vue': '<template>Hello from index!</template>',
+              'index.vue': '<template><div id="text">Hello from index!</div></template>',
             },
           },
         ],
@@ -21,7 +21,7 @@ test('supports pages concept', async ({ page }) => {
     async ({ get }) => {
       const { text } = await get(page, '/')
       expect(text).toContain('Hello from index!')
-      await expect(page.locator('#app')).toContainText('Hello from index!')
+      await expect(page.locator('#text')).toContainText('Hello from index!')
     },
   )
 })
