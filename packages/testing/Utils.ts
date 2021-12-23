@@ -3,7 +3,7 @@ import fs from 'fs/promises'
 import { Server } from 'http'
 import { Application } from 'express'
 import getPort from 'get-port'
-import { Dev } from '@fir/core/src/Dev'
+import { Dev } from '@fir-js/core/src/Dev'
 import { Page } from '@playwright/test'
 
 interface MakeProjectConfig {

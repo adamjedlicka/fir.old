@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('title', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -18,7 +18,7 @@ test('title', async ({ page }) => {
                   <h1>Hello, World!</h1>
                 </template>
                 <script>
-                import Title from '@fir/vue/components/Title.vue'
+                import Title from '@fir-js/vue/components/Title.vue'
                 export default {
                   components: {
                     Title,
@@ -43,9 +43,9 @@ test('title updates when navigating pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -57,7 +57,7 @@ test('title updates when navigating pages', async ({ page }) => {
                   <RouterLink to="/second">link</RouterLink>
                 </template>
                 <script>
-                import Title from '@fir/vue/components/Title.vue'
+                import Title from '@fir-js/vue/components/Title.vue'
                 export default {
                   components: {
                     Title,

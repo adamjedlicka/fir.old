@@ -1,6 +1,6 @@
 import { App } from 'vue'
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
-import { isServer } from '@fir/core'
+import { isServer } from '@fir-js/core'
 import { routes } from '/_Pages'
 
 export default async (app: App, ctx) => {

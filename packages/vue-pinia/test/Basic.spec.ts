@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('it works', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
-        '@fir/vue-pinia',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
+        '@fir-js/vue-pinia',
         [
           'my-package',
           {
@@ -30,10 +30,10 @@ test.skip('it transfers state', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
-        '@fir/vue-pinia',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
+        '@fir-js/vue-pinia',
         [
           'my-package',
           {

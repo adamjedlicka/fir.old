@@ -1,5 +1,5 @@
 import { useSSRContext, getCurrentInstance } from 'vue'
-import type { AppContext } from '@fir/core/src/Fir'
+import type { AppContext } from '@fir-js/core/src/Fir'
 
 const pointers = {}
 

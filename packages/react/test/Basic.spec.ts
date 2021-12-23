@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('serves React app', async ({ page }) => {
   await makeProject(
     {
-      packages: ['@fir/base', '@fir/react'],
+      packages: ['@fir-js/base', '@fir-js/react'],
     },
     async ({ get }) => {
       const { text } = await get(page, '/')
@@ -18,8 +18,8 @@ test('serves complex React app', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/react',
+        '@fir-js/base',
+        '@fir-js/react',
         [
           'my-package',
           {

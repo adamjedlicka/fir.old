@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('basic route', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir-js/base',
         [
           'my-package',
           {
@@ -30,7 +30,7 @@ test('HMR', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir-js/base',
         [
           'my-package',
           {
@@ -63,7 +63,7 @@ test('module overloading', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
+        '@fir-js/base',
         [
           'my-package',
           {

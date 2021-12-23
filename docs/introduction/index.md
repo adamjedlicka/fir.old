@@ -24,7 +24,7 @@ So why is Fir better for complex applications compared to other meta-frameworks?
 
 Applications built on top Fir are made of modules. These modules are basically small applications. So each module might have `components/` directory and `pages/` directory and `stores/` directory. Each module represents only one domain of the whole application. So if you are building an e-shop, you might have `homepage` module and `catalog` module and `checkout` module. This structure of code is extremely flexible, allows better orientation in whole codebase and can support multiple teams working on the application at the same time.
 
-Everything in Fir is made of these modules. By default, Fir can't do much. So if you want to develop a Vue application, you enable `@fir/vue` module. Do you want your application to support routing and have multiple pages? Easy. Just enable `@fir/vue-router` module. Do you need state management? There is a module for it.
+Everything in Fir is made of these modules. By default, Fir can't do much. So if you want to develop a Vue application, you enable `@fir-js/vue` module. Do you want your application to support routing and have multiple pages? Easy. Just enable `@fir-js/vue-router` module. Do you need state management? There is a module for it.
 
 This also means if you are missing some functionality, you can create your own module wich will add it. And enabling/disabling these modules means you can easilly change the behaviout of the whole application.
 

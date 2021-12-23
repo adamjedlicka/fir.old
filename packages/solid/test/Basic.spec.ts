@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('serves Solid app', async ({ page }) => {
   await makeProject(
     {
-      packages: ['@fir/base', '@fir/solid'],
+      packages: ['@fir-js/base', '@fir-js/solid'],
     },
     async ({ get }) => {
       const { text } = await get(page, '/')
@@ -17,7 +17,7 @@ test('serves Solid app', async ({ page }) => {
 test('clicking increment button increases count', async ({ page }) => {
   await makeProject(
     {
-      packages: ['@fir/base', '@fir/solid'],
+      packages: ['@fir-js/base', '@fir-js/solid'],
     },
     async ({ get }) => {
       const { text } = await get(page, '/')

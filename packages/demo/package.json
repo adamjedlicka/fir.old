@@ -10,9 +10,9 @@
     "serve": "fir serve"
   },
   "dependencies": {
-    "@fir/core": "workspace:*",
-    "@fir/vue": "workspace:*",
-    "@fir/vue-router": "workspace:*",
+    "@fir-js/core": "workspace:*",
+    "@fir-js/vue": "workspace:*",
+    "@fir-js/vue-router": "workspace:*",
     "autoprefixer": "^10.3.3",
     "http-proxy-middleware": "^2.0.1",
     "postcss": "^8.3.6",

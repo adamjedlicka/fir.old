@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('vite config merging', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {

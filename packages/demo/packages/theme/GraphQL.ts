@@ -1,5 +1,5 @@
-import { isServer } from '@fir/core'
-import { createFetcher } from '@fir/vue/utils/CoreUtils'
+import { isServer } from '@fir-js/core'
+import { createFetcher } from '@fir-js/vue/utils/CoreUtils'
 
 const endpoint = isServer ? 'https://venia.magento.com' : ''
 

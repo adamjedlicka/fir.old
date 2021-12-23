@@ -35,7 +35,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import Title from '@fir/vue/components/Title.vue'
+import Title from '@fir-js/vue/components/Title.vue'
 import CategoriesByUrlKey from '../../gql/queries/CategoriesByUrlKey.gql'
 import { query } from '../../GraphQL'
 

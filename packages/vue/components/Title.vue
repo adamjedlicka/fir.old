@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, useSSRContext, watchEffect } from 'vue'
-import { isServer } from '@fir/core'
+import { isServer } from '@fir-js/core'
 
 export default defineComponent({
   setup(_, { slots }) {

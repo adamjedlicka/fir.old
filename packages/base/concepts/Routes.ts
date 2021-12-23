@@ -1,8 +1,8 @@
 import path from 'path'
 import { Express, RequestHandler } from 'express'
-import { Package } from '@fir/core/src/Package'
-import { Dev } from '@fir/core/src/Dev'
-import { GeneratingConcept } from '@fir/core/src/GeneratingConcept'
+import { Package } from '@fir-js/core/src/Package'
+import { Dev } from '@fir-js/core/src/Dev'
+import { GeneratingConcept } from '@fir-js/core/src/GeneratingConcept'
 
 export default class Routes extends GeneratingConcept {
   routes: Record<string, RequestHandler> = {}

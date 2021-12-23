@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('supports pages concept', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -30,9 +30,9 @@ test('supports multiple pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -57,9 +57,9 @@ test('has default 404', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -82,9 +82,9 @@ test('supports layouts', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -110,9 +110,9 @@ test('navigation between pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -157,9 +157,9 @@ test('nested routes', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -184,9 +184,9 @@ test('dynamic parameters', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -211,9 +211,9 @@ test('route with wildcard has lower priority than fully fixed route', async ({ p
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
@@ -239,9 +239,9 @@ test('route params can be rendered', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {

@@ -1,6 +1,6 @@
 import path from 'path'
-import { GeneratingConcept } from '@fir/core/src/GeneratingConcept'
-import { Package } from '@fir/core/src/Package'
+import { GeneratingConcept } from '@fir-js/core/src/GeneratingConcept'
+import { Package } from '@fir-js/core/src/Package'
 
 export default class Templates extends GeneratingConcept {
   directory() {

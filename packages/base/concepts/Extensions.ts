@@ -1,6 +1,6 @@
 import path from 'path'
-import { Package } from '@fir/core/src/Package'
-import { Concept } from '@fir/core/src/Concept'
+import { Package } from '@fir-js/core/src/Package'
+import { Concept } from '@fir-js/core/src/Concept'
 
 export default class Extensions extends Concept {
   directory() {

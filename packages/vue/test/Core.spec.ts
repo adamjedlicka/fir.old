@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test'
-import { makeProject } from '@fir/testing/Utils'
+import { makeProject } from '@fir-js/testing/Utils'
 
 test('serves an app', async ({ page }) => {
   await makeProject(
     {
-      packages: ['@fir/base', '@fir/vue'],
+      packages: ['@fir-js/base', '@fir-js/vue'],
     },
     async ({ url }) => {
       await page.goto(url)
@@ -17,8 +17,8 @@ test('supports payload', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
+        '@fir-js/base',
+        '@fir-js/vue',
         [
           'ma-package',
           {
@@ -28,7 +28,7 @@ test('supports payload', async ({ page }) => {
                   <div>Hello, World!</div>
                 </template>
                 <script>
-                import { usePayload } from '@fir/vue/compositions/Payload'
+                import { usePayload } from '@fir-js/vue/compositions/Payload'
                 export default {
                   setup: () => {
                     const payload = usePayload()
@@ -53,8 +53,8 @@ test('supports custom fetchers', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
+        '@fir-js/base',
+        '@fir-js/vue',
         [
           'ma-package',
           {
@@ -64,7 +64,7 @@ test('supports custom fetchers', async ({ page }) => {
                   <div>some {{ data }} here</div>
                 </template>
                 <script>
-                import { createFetcher } from '@fir/vue/utils/CoreUtils'
+                import { createFetcher } from '@fir-js/vue/utils/CoreUtils'
                 const useFetcher = createFetcher({
                   fetcher: async () => 'data'
                 })
@@ -95,8 +95,8 @@ test('supports ejs templates', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
+        '@fir-js/base',
+        '@fir-js/vue',
         [
           'my-package',
           {
@@ -122,9 +122,9 @@ test('HMR', async ({ page }) => {
   await makeProject(
     {
       packages: [
-        '@fir/base',
-        '@fir/vue',
-        '@fir/vue-router',
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
         [
           'my-package',
           {
