@@ -12,14 +12,10 @@ module.exports = {
     nav: [{ text: 'GitHub', link: 'https://github.com/adamjedlicka/fir' }],
 
     sidebar: {
-      '/introduction/': [
+      '/': [
         {
-          text: 'Introduction',
-          link: '/introduction/',
-          children: [
-            { text: 'Modules', link: '/introduction/modules' },
-            { text: 'Inversion of control', link: '/introduction/inversion-of-control' },
-          ],
+          text: 'Getting started',
+          link: '/getting-started/',
         },
       ],
     },
