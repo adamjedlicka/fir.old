@@ -838,7 +838,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fir-js/core@*, @fir-js/core@workspace:packages/core":
+"@fir-js/core@^0.1.5, @fir-js/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@fir-js/core@workspace:packages/core"
   dependencies:
@@ -899,7 +899,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fir-js/vue-router@*, @fir-js/vue-router@workspace:packages/vue-router":
+"@fir-js/vue-router@^0.1.5, @fir-js/vue-router@workspace:packages/vue-router":
   version: 0.0.0-use.local
   resolution: "@fir-js/vue-router@workspace:packages/vue-router"
   dependencies:
@@ -907,7 +907,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fir-js/vue@*, @fir-js/vue@workspace:packages/vue":
+"@fir-js/vue@^0.1.5, @fir-js/vue@workspace:packages/vue":
   version: 0.0.0-use.local
   resolution: "@fir-js/vue@workspace:packages/vue"
   dependencies:
@@ -3672,6 +3672,8 @@ __metadata:
   resolution: "create-fir@workspace:packages/create-fir"
   dependencies:
     fs-extra: ^10.0.0
+    kolorist: ^1.5.1
+    minimist: ^1.2.5
     prompts: ^2.4.2
   bin:
     create-fir: index.js
@@ -3881,9 +3883,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo@workspace:packages/demo"
   dependencies:
-    "@fir-js/core": "*"
-    "@fir-js/vue": "*"
-    "@fir-js/vue-router": "*"
+    "@fir-js/core": ^0.1.5
+    "@fir-js/vue": ^0.1.5
+    "@fir-js/vue-router": ^0.1.5
     autoprefixer: ^10.3.3
     http-proxy-middleware: ^2.0.1
     postcss: ^8.3.6
@@ -6156,6 +6158,13 @@ __metadata:
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
   checksum: df82cd1e172f957bae9c536286265a5cdbd5eeca487cb0a3b2a7b41ef959fc61f8e7c0e9aeea9c114ccf2c166b6a8dd45a46fd619c1c569d210ecd2765ad5169
+  languageName: node
+  linkType: hard
+
+"kolorist@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "kolorist@npm:1.5.1"
+  checksum: c113be08834fc03a24699612141c79879fceba9ff9765ad500507fb594ee4fa3465a3453ea90bbc9b0dd82f7ba5dbd79814da28e9ebaf8da27266a0088ba2714
   languageName: node
   linkType: hard
 
