@@ -50,7 +50,7 @@ test('title updates when navigating pages', async ({ page }) => {
           'app',
           {
             pages: {
-              '_id.vue': `
+              '[id].vue': `
                 <template>
                   <Title>{{ $route.params.id }}</Title>
                   <h1>Hello, World!</h1>

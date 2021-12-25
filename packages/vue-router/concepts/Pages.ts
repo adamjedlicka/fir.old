@@ -40,7 +40,13 @@ export default class Pages extends GeneratingConcept {
     if (parts[0] === 'index') return '/'
     if (parts[0] === '$404') return '/:pathMatch(.*)*'
 
-    const route = parts.map((part) => (part[0] == '_' ? `:${part.slice(1)}` : part)).join('/')
+    const route = parts
+      .map((part) =>
+        part.replace(/\[(.+?)\]/g, (_, $1) => {
+          return `:${$1}(.+)`
+        }),
+      )
+      .join('/')
 
     return `/${route}`
   }

@@ -192,7 +192,7 @@ test('dynamic parameters', async ({ page }) => {
           {
             pages: {
               user: {
-                '_id.vue': '<template>User detail</template>',
+                '[id].vue': '<template>User detail</template>',
               },
             },
           },
@@ -247,7 +247,7 @@ test('route params can be rendered', async ({ page }) => {
           {
             pages: {
               user: {
-                '_id.vue': '<template>{{ $route.params.id }}</template>',
+                '[id].vue': '<template>{{ $route.params.id }}</template>',
               },
             },
           },
@@ -283,6 +283,31 @@ test('supports custom 404', async ({ page }) => {
       const { text } = await get(page, '/b')
       expect(text).toContain('custom')
       await expect(page.locator('#app')).toContainText('custom')
+    },
+  )
+})
+
+test('multiple parameters', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
+        [
+          'app',
+          {
+            pages: {
+              '[a]-[b].vue': '<template>{{ $route.params.a }}+{{ $route.params.b }}</template>'
+            },
+          },
+        ],
+      ],
+    },
+    async ({ get }) => {
+      const { text } = await get(page, '/ab-cd')
+      expect(text).toContain('ab+cd')
+      await expect(page.locator('#app')).toContainText('ab+cd')
     },
   )
 })
