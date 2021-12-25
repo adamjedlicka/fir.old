@@ -1,6 +1,6 @@
 {
   "name": "@fir-js/solid",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
   "dependencies": {
