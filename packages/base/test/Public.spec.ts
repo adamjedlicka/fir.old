@@ -7,7 +7,7 @@ test('serves static files from public directory', async ({ page }) => {
       packages: [
         '@fir-js/base',
         [
-          'my-package',
+          'app',
           {
             public: {
               'a.txt': '1',
@@ -30,7 +30,7 @@ test('overrides files with same name', async ({ page }) => {
       packages: [
         '@fir-js/base',
         [
-          'my-package-a',
+          'app-a',
           {
             public: {
               'a.txt': '1',
@@ -38,7 +38,7 @@ test('overrides files with same name', async ({ page }) => {
           },
         ],
         [
-          'my-package-b',
+          'app-b',
           {
             public: {
               'a.txt': '2',

@@ -21,7 +21,7 @@ test('serves complex React app', async ({ page }) => {
         '@fir-js/base',
         '@fir-js/react',
         [
-          'my-package',
+          'app',
           {
             templates: {
               'App.jsx': `

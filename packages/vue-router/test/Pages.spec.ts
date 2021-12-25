@@ -9,7 +9,7 @@ test('supports pages concept', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': '<template><div id="text">Hello from index!</div></template>',
@@ -34,7 +34,7 @@ test('supports multiple pages', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': '<template>Hello from index!</template>',
@@ -61,7 +61,7 @@ test('has default 404', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': '<template>Hello from index!</template>',
@@ -86,10 +86,10 @@ test('supports layouts', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
-              '_layout.vue': '<template><h1>Hello from layout!</h1><slot/></template>',
+              '$layout.vue': '<template><h1>Hello from layout!</h1><slot/></template>',
               'index.vue': '<template>Hello from index!</template>',
             },
           },
@@ -114,10 +114,10 @@ test('navigation between pages', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
-              '_layout.vue': `
+              '$layout.vue': `
                 <template>
                   <router-link id="a" to="/a">1</router-link>
                   <router-link id="b" to="/b">b</router-link>
@@ -161,7 +161,7 @@ test('nested routes', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               a: {
@@ -188,7 +188,7 @@ test('dynamic parameters', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               user: {
@@ -215,7 +215,7 @@ test('route with wildcard has lower priority than fully fixed route', async ({ p
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               user: {
@@ -243,7 +243,7 @@ test('route params can be rendered', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               user: {
@@ -258,6 +258,31 @@ test('route params can be rendered', async ({ page }) => {
       const { text } = await get(page, '/user/12345')
       expect(text).toContain('12345')
       await expect(page.locator('#app')).toContainText('12345')
+    },
+  )
+})
+
+test('supports custom 404', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
+        [
+          'app',
+          {
+            pages: {
+              '$404.vue': '<template>custom</template>'
+            },
+          },
+        ],
+      ],
+    },
+    async ({ get }) => {
+      const { text } = await get(page, '/b')
+      expect(text).toContain('custom')
+      await expect(page.locator('#app')).toContainText('custom')
     },
   )
 })

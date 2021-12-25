@@ -9,7 +9,7 @@ test('vite config merging', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             'pages': {
               'index.vue': `

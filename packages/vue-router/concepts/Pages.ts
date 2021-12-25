@@ -9,12 +9,12 @@ export default class Pages extends GeneratingConcept {
 
   async generate(files) {
     const pages = files
-      .filter((file) => file.ident !== '_layout')
+      .filter((file) => file.ident !== '$layout')
       .sort((a, b) => {
         return a.priority - b.priority
       })
 
-    const layout = files.find((file) => file.ident === '_layout')
+    const layout = files.find((file) => file.ident === '$layout')
 
     await this.renderTemplate('_Pages.ts.ejs', { pages, layout })
   }
@@ -38,7 +38,7 @@ export default class Pages extends GeneratingConcept {
 
   protected getPath(parts: string[]): string {
     if (parts[0] === 'index') return '/'
-    if (parts[0] === '_404') return '/:pathMatch(.*)*'
+    if (parts[0] === '$404') return '/:pathMatch(.*)*'
 
     const route = parts.map((part) => (part[0] == '_' ? `:${part.slice(1)}` : part)).join('/')
 
@@ -47,7 +47,7 @@ export default class Pages extends GeneratingConcept {
 
   protected getPriority(parts: string[]): number {
     if (parts[0] === 'index') return 1
-    if (parts[0] === '_404') return 9001
+    if (parts[0] === '$404') return 9001
 
     let priority = 10
 

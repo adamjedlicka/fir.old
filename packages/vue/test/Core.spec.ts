@@ -98,7 +98,7 @@ test('supports ejs templates', async ({ page }) => {
         '@fir-js/base',
         '@fir-js/vue',
         [
-          'my-package',
+          'app',
           {
             templates: {
               'App.vue.ejs': `
@@ -126,7 +126,7 @@ test('HMR', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': `
@@ -142,7 +142,7 @@ test('HMR', async ({ page }) => {
     async ({ url, writeFile }) => {
       await page.goto(url)
       await writeFile(
-        'my-package/pages/index.vue',
+        'app/pages/index.vue',
         `
         <template>
           <h1>Hello, B!</h1>

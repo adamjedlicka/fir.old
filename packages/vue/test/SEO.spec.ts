@@ -9,7 +9,7 @@ test('title', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': `
@@ -47,7 +47,7 @@ test('title updates when navigating pages', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               '_id.vue': `

@@ -10,7 +10,7 @@ test('it works', async ({ page }) => {
         '@fir-js/vue-router',
         '@fir-js/vue-pinia',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': '<template><h1>Hello, Pinia!</h1></template>',
@@ -35,7 +35,7 @@ test.skip('it transfers state', async ({ page }) => {
         '@fir-js/vue-router',
         '@fir-js/vue-pinia',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': `

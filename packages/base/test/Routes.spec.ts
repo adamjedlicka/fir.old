@@ -7,7 +7,7 @@ test('basic route', async ({ page }) => {
       packages: [
         '@fir-js/base',
         [
-          'my-package',
+          'app',
           {
             routes: {
               'hello.ts': `
@@ -32,7 +32,7 @@ test('HMR', async ({ page }) => {
       packages: [
         '@fir-js/base',
         [
-          'my-package',
+          'app',
           {
             routes: {
               'hello.ts': `
@@ -46,7 +46,7 @@ test('HMR', async ({ page }) => {
     },
     async ({ get, writeFile }) => {
       await writeFile(
-        'my-package/routes/hello.ts',
+        'app/routes/hello.ts',
         `
         export default function (req, res) {
           res.send('Hello, HMR!')
@@ -65,7 +65,7 @@ test('module overloading', async ({ page }) => {
       packages: [
         '@fir-js/base',
         [
-          'my-package',
+          'app',
           {
             routes: {
               'hello.ts': `
@@ -76,7 +76,7 @@ test('module overloading', async ({ page }) => {
           },
         ],
         [
-          'my-package-overload',
+          'app-overload',
           {
             routes: {
               'hello.ts': `

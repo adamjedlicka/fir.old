@@ -9,7 +9,7 @@ test('handles error during created hook', async ({ page }) => {
         '@fir-js/vue',
         '@fir-js/vue-router',
         [
-          'my-package',
+          'app',
           {
             pages: {
               'index.vue': `
