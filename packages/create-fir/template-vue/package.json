@@ -7,10 +7,10 @@
     "serve": "fir serve"
   },
   "dependencies": {
-    "@fir-js/base": "^0.1.5",
-    "@fir-js/core": "^0.1.5",
-    "@fir-js/vue-router": "^0.1.5",
-    "@fir-js/vue": "^0.1.5"
+    "@fir-js/base": "*",
+    "@fir-js/core": "*",
+    "@fir-js/vue-router": "*",
+    "@fir-js/vue": "*"
   },
   "devDependencies": {
     "@types/node": "^17.0.2"

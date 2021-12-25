@@ -838,7 +838,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fir-js/core@^0.1.5, @fir-js/core@workspace:packages/core":
+"@fir-js/core@*, @fir-js/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@fir-js/core@workspace:packages/core"
   dependencies:
@@ -899,7 +899,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fir-js/vue-router@^0.1.5, @fir-js/vue-router@workspace:packages/vue-router":
+"@fir-js/vue-router@*, @fir-js/vue-router@workspace:packages/vue-router":
   version: 0.0.0-use.local
   resolution: "@fir-js/vue-router@workspace:packages/vue-router"
   dependencies:
@@ -907,7 +907,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fir-js/vue@^0.1.5, @fir-js/vue@workspace:packages/vue":
+"@fir-js/vue@*, @fir-js/vue@workspace:packages/vue":
   version: 0.0.0-use.local
   resolution: "@fir-js/vue@workspace:packages/vue"
   dependencies:
@@ -3883,9 +3883,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo@workspace:packages/demo"
   dependencies:
-    "@fir-js/core": ^0.1.5
-    "@fir-js/vue": ^0.1.5
-    "@fir-js/vue-router": ^0.1.5
+    "@fir-js/core": "*"
+    "@fir-js/vue": "*"
+    "@fir-js/vue-router": "*"
     autoprefixer: ^10.3.3
     http-proxy-middleware: ^2.0.1
     postcss: ^8.3.6
