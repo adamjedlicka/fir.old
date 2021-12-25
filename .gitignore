@@ -4,6 +4,7 @@ node_modules/
 .vite/
 
 yarn-error.log
+lerna-debug.log
 
 .yarn/*
 !.yarn/cache
