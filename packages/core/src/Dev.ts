@@ -33,7 +33,11 @@ export class Dev extends Fir {
 
         const { default: entry } = await viteDevServer.ssrLoadModule('/entry-server')
 
-        return await this.handleRequest(entry, { template, req }, res)
+        const ctx = {
+          req,
+        }
+
+        return await this.handleRequest(entry, { template, ctx }, res)
       } catch (e) {
         viteDevServer.ssrFixStacktrace(e)
 

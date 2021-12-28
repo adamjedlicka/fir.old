@@ -4,7 +4,7 @@ import fetch from 'node-fetch'
 import { Package } from './Package'
 import { Concept } from './Concept'
 import { mergeConfig, UserConfig } from 'vite'
-import { Request, Response } from 'express'
+import { Response } from 'express'
 
 global.fetch = fetch
 
@@ -15,13 +15,12 @@ interface Config {
 
 interface RequestInput {
   template: string
-  req: Request
+  ctx: Record<string, any>
   manifest?: Record<string, string[]>
 }
 
 interface RequestOutput {
   html: string
-  error: Error | null
 }
 
 type Entry = (requestInput: RequestInput) => Promise<RequestOutput>
@@ -81,9 +80,9 @@ export abstract class Fir {
   }
 
   async handleRequest(entry: Entry, requestInput: RequestInput, res: Response) {
-    const { html, error } = await entry(requestInput)
+    const { html } = await entry(requestInput)
 
-    if (error) throw error
+    if (requestInput.ctx.error) throw requestInput.ctx.error
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   }
