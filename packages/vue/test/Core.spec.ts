@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { makeProject } from '@fir-js/testing/Utils'
 
-test('serves an app', async ({ page }) => {
+test('basic app', async ({ page }) => {
   await makeProject(
     {
       packages: ['@fir-js/base', '@fir-js/vue'],
@@ -13,7 +13,7 @@ test('serves an app', async ({ page }) => {
   )
 })
 
-test('supports payload', async ({ page }) => {
+test('payload', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -49,7 +49,7 @@ test('supports payload', async ({ page }) => {
   )
 })
 
-test('supports custom fetchers', async ({ page }) => {
+test('custom fetchers', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -91,7 +91,7 @@ test('supports custom fetchers', async ({ page }) => {
   )
 })
 
-test('supports ejs templates', async ({ page }) => {
+test('ejs templates', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -114,41 +114,6 @@ test('supports ejs templates', async ({ page }) => {
     async ({ url }) => {
       await page.goto(url)
       await expect(page.locator('h1')).toHaveText('A')
-    },
-  )
-})
-
-test('HMR', async ({ page }) => {
-  await makeProject(
-    {
-      packages: [
-        '@fir-js/base',
-        '@fir-js/vue',
-        '@fir-js/vue-router',
-        [
-          'app',
-          {
-            pages: {
-              'index.vue': `
-                <template>
-                  <h1>Hello, A!</h1>
-                </template>
-              `,
-            },
-          },
-        ],
-      ],
-    },
-    async ({ url, writeFile }) => {
-      await page.goto(url)
-      await writeFile(
-        'app/pages/index.vue',
-        `
-        <template>
-          <h1>Hello, B!</h1>
-        </template>`,
-      )
-      await expect(page.locator('h1')).toHaveText('Hello, B!')
     },
   )
 })

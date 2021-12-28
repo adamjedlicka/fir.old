@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { makeProject } from '@fir-js/testing/Utils'
 
-test('supports pages concept', async ({ page }) => {
+test('pages concept', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -26,7 +26,7 @@ test('supports pages concept', async ({ page }) => {
   )
 })
 
-test('supports multiple pages', async ({ page }) => {
+test('multiple pages', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -53,7 +53,7 @@ test('supports multiple pages', async ({ page }) => {
   )
 })
 
-test('has default 404', async ({ page }) => {
+test('default 404', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -78,7 +78,7 @@ test('has default 404', async ({ page }) => {
   )
 })
 
-test('supports layouts', async ({ page }) => {
+test('layouts', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -262,7 +262,7 @@ test('route params can be rendered', async ({ page }) => {
   )
 })
 
-test('supports custom 404', async ({ page }) => {
+test('custom 404', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -273,7 +273,7 @@ test('supports custom 404', async ({ page }) => {
           'app',
           {
             pages: {
-              '$404.vue': '<template>custom</template>'
+              '$404.vue': '<template>custom</template>',
             },
           },
         ],
@@ -298,7 +298,7 @@ test('multiple parameters', async ({ page }) => {
           'app',
           {
             pages: {
-              '[a]-[b].vue': '<template>{{ $route.params.a }}+{{ $route.params.b }}</template>'
+              '[a]-[b].vue': '<template>{{ $route.params.a }}+{{ $route.params.b }}</template>',
             },
           },
         ],
@@ -308,6 +308,41 @@ test('multiple parameters', async ({ page }) => {
       const { text } = await get(page, '/ab-cd')
       expect(text).toContain('ab+cd')
       await expect(page.locator('#app')).toContainText('ab+cd')
+    },
+  )
+})
+
+test('hot module reloading', async ({ page }) => {
+  await makeProject(
+    {
+      packages: [
+        '@fir-js/base',
+        '@fir-js/vue',
+        '@fir-js/vue-router',
+        [
+          'app',
+          {
+            pages: {
+              'index.vue': `
+                <template>
+                  <h1>Hello, A!</h1>
+                </template>
+              `,
+            },
+          },
+        ],
+      ],
+    },
+    async ({ get, writeFile }) => {
+      await get(page, '/')
+      await writeFile(
+        'app/pages/index.vue',
+        `
+        <template>
+          <h1>Hello, B!</h1>
+        </template>`,
+      )
+      await expect(page.locator('h1')).toHaveText('Hello, B!')
     },
   )
 })

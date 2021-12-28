@@ -15,6 +15,8 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "demo:dev": "yarn workspace demo dev",
+    "demo:build": "yarn workspace demo build",
+    "demo:serve": "yarn workspace demo serve",
     "publish": "yarn test && yarn lerna publish"
   },
   "devDependencies": {

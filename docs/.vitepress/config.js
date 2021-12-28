@@ -17,6 +17,24 @@ module.exports = {
           text: 'Getting started',
           link: '/getting-started/',
         },
+        {
+          text: 'Packages',
+          link: '/packages/',
+          children: [
+            {
+              text: 'Base',
+              link: '/packages/base',
+            },
+            {
+              text: 'Vue',
+              link: '/packages/vue',
+            },
+            {
+              text: 'Vue router',
+              link: '/packages/vue-router',
+            },
+          ],
+        },
       ],
     },
   },
