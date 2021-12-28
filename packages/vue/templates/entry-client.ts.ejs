@@ -2,14 +2,14 @@ import { createSSRApp } from 'vue'
 import App from './App.vue'
 
 <%_ for (const [extension, path] of Object.entries(context.extensions)) { _%>
-import <%- extension -%> from '<%- path -%>'
+import * as <%- extension -%> from '<%- path -%>'
 <%_ } _%>
 
 const main = async () => {
   const app = createSSRApp(App)
 
   <%_ for (const [extension] of Object.entries(context.extensions)) { _%>
-  await <%- extension -%>(app)
+  if (<%- extension -%>.before) await <%- extension -%>.before(app)
   <%_ } _%>
 
   app.mount('#app', true)

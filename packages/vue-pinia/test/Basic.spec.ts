@@ -26,7 +26,7 @@ test('it works', async ({ page }) => {
   )
 })
 
-test.skip('it transfers state', async ({ page }) => {
+test('it transfers state', async ({ page }) => {
   await makeProject(
     {
       packages: [
@@ -43,11 +43,14 @@ test.skip('it transfers state', async ({ page }) => {
                   <div>{{ store.count }}</div>
                 </template>
                 <script>
+                import { isServer } from '@fir-js/core'
                 import { useStore } from '../stores/main'
 
                 export default {
                   setup() {
                     const store = useStore()
+
+                    if (isServer) store.increment()
 
                     return {
                       store

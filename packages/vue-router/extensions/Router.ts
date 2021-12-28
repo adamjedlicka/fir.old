@@ -3,7 +3,7 @@ import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 import { isServer } from '@fir-js/core'
 import { routes } from '/_Pages'
 
-export default async (app: App, ctx) => {
+export const before = async (app: App, ctx) => {
   const router = createRouter({
     history: isServer ? createMemoryHistory() : createWebHistory(),
     routes,

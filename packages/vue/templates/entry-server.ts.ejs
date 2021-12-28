@@ -4,7 +4,7 @@ import { renderToString } from 'vue/server-renderer'
 import App from './App.vue'
 
 <%_ for (const [extension, path] of Object.entries(context.extensions)) { _%>
-import <%- extension -%> from '<%- path -%>'
+import * as <%- extension -%> from '<%- path -%>'
 <%_ } _%>
 
 export default async ({ template, ctx, manifest }) => {
@@ -17,7 +17,7 @@ export default async ({ template, ctx, manifest }) => {
   const app = createSSRApp(App)
 
   <%_ for (const [extension] of Object.entries(context.extensions)) { _%>
-  await <%- extension -%>(app, ctx)
+  if (<%- extension -%>.before) await <%- extension -%>.before(app, ctx)
   <%_ } _%>
 
   const html = template
@@ -26,7 +26,13 @@ export default async ({ template, ctx, manifest }) => {
     .replace('<!--payload-->', `<script>window.__PAYLOAD__ = ${devalue(ctx.payload)}</script>`)
     .replace('<!--head-->', renderHead(ctx.head))
 
-  return { html }
+  const output = { html }
+
+  <%_ for (const [extension] of Object.entries(context.extensions)) { _%>
+  if (<%- extension -%>.after) await <%- extension -%>.after(app, ctx, output)
+  <%_ } _%>
+
+  return output
 }
 
 function preloadLinks(ctx, manifest = {}): string {
