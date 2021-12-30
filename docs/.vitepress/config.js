@@ -30,8 +30,12 @@ module.exports = {
               link: '/packages/vue',
             },
             {
-              text: 'Vue router',
+              text: 'Vue Router',
               link: '/packages/vue-router',
+            },
+            {
+              text: 'Vue Pinia',
+              link: '/packages/vue-pinia',
             },
           ],
         },

@@ -1,4 +1,4 @@
-# Vue router
+# Vue Router
 
 The `@fir-js/vue-router` adds client side routing functionality.
 
