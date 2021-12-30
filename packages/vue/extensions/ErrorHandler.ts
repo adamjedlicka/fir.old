@@ -5,3 +5,5 @@ export const before = async (app: App, ctx) => {
     ctx.error = err
   }
 }
+
+export const after = async () => {}

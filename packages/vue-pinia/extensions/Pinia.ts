@@ -19,7 +19,7 @@ export const after = async (app: App, ctx, output) => {
   if (!isServer) return
 
   output.html = output.html.replace(
-    '<body>',
-    `<body><script>window.__PINIA__ = ${devalue(ctx.pinia.state.value)}</script>`,
+    '<!--after-app-->',
+    `<!--after-app--><script>window.__PINIA__ = ${devalue(ctx.pinia.state.value)}</script>`,
   )
 }

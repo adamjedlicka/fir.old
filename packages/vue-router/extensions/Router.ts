@@ -15,3 +15,5 @@ export const before = async (app: App, ctx) => {
 
   app.use(router)
 }
+
+export const after = async () => {}

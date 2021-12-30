@@ -25,7 +25,13 @@ export class Serve extends Fir {
 
     server.get('*', async (req, res) => {
       try {
-        return await this.handleRequest(entry, { template, req, manifest }, res)
+        const ctx = {
+          req,
+          res,
+          manifest,
+        }
+
+        return await this.handleRequest(entry, { template, ctx }, res)
       } catch (e) {
         const youch = new Youch(e, req)
 

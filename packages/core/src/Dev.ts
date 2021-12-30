@@ -35,6 +35,7 @@ export class Dev extends Fir {
 
         const ctx = {
           req,
+          res,
         }
 
         return await this.handleRequest(entry, { template, ctx }, res)

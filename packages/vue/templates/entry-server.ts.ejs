@@ -7,7 +7,7 @@ import App from './App.vue'
 import * as <%- extension -%> from '<%- path -%>'
 <%_ } _%>
 
-export default async ({ template, ctx, manifest }) => {
+export default async ({ template, ctx }) => {
   let id = 0
 
   ctx.payload = {}
@@ -20,60 +20,15 @@ export default async ({ template, ctx, manifest }) => {
   if (<%- extension -%>.before) await <%- extension -%>.before(app, ctx)
   <%_ } _%>
 
-  const html = template
-    .replace('<!--app-html-->', await renderToString(app, ctx))
-    .replace('<!--preload-links-->', preloadLinks(ctx, manifest))
-    .replace('<!--payload-->', `<script>window.__PAYLOAD__ = ${devalue(ctx.payload)}</script>`)
-    .replace('<!--head-->', renderHead(ctx.head))
+  const html = template.replace('<!--app-->', await renderToString(app, ctx))
 
-  const output = { html }
+  const output = {
+    html,
+  }
 
   <%_ for (const [extension] of Object.entries(context.extensions)) { _%>
   if (<%- extension -%>.after) await <%- extension -%>.after(app, ctx, output)
   <%_ } _%>
 
   return output
-}
-
-function preloadLinks(ctx, manifest = {}): string {
-  let links = ''
-
-  const seen = new Set()
-
-  for (const module of ctx.modules ?? []) {
-    const files = manifest[module]
-
-    if (!files) continue
-
-    for (const file of files) {
-      if (seen.has(file)) continue
-
-      seen.add(file)
-
-      links += renderPreloadLink(file)
-    }
-  }
-
-  return links
-}
-
-function renderPreloadLink(file: string): string {
-  if (file.endsWith('.js')) {
-    return `<link rel="modulepreload" crossorigin href="${file}">`
-  } else if (file.endsWith('.css')) {
-    return `<link rel="stylesheet" href="${file}">`
-  } else {
-    // TODO
-    return ''
-  }
-}
-
-function renderHead(head: Record<string, any>): string {
-  let rendered = ''
-
-  for (const [key, value] of Object.entries(head)) {
-    rendered += `<${key}>${value}</${key}>`
-  }
-
-  return rendered
 }
