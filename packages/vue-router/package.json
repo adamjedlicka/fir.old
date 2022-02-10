@@ -4,6 +4,6 @@
   "author": "Adam Jedlička <mail@adamjedlicka.cz>",
   "license": "MIT",
   "dependencies": {
-    "vue-router": "^4.0.0"
+    "vue-router": "^4.0.12"
   }
 }

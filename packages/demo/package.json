@@ -13,9 +13,9 @@
     "@fir-js/core": "*",
     "@fir-js/vue": "*",
     "@fir-js/vue-router": "*",
-    "autoprefixer": "^10.3.3",
-    "http-proxy-middleware": "^2.0.1",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^3.0.7"
+    "autoprefixer": "^10.4.2",
+    "http-proxy-middleware": "^2.0.3",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.20"
   }
 }
